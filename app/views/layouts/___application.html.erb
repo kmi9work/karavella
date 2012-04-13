@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <title>Надя</title>
+  	<%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div class="container">
+      <div class="">
+    </div>
+  
+  
+  
+  
+  
+										  <p class="notice"><%= notice %></p>
+                      <p class="alert"><%= alert %></p>
+											<div id="search">
+											  <input type="string" size="19"><%= link_to "logout",  destroy_admin_session_path, :method => :delete if admin_signed_in? %></div><input type="button" value="Поиск">
+											  
+                        <!-- <jdoc:include type="modules" name="user1" /> -->
+											</div>
+											<div id="topmenu">
+                        <!-- <jdoc:include type="modules" name="top" /> -->
+											</div>
+										</div>
+										<div id="bar"><div align="center">
+										  <%= image_tag "vkontakte.png" %>
+										  <%= image_tag "facebook.png" %>
+										  <%= image_tag "twitter.png" %>
+										  <%= image_tag "google.png" %>
+										  <%= image_tag "youtube.png" %>
+										</div></div>
+										<div id="border">
+											<div id="border1">
+												<div id="border2">
+													<div id="header">
+														<div class="bg">
+															<div class="space">
+																<div class="width">
+																	<a href="/"><%= image_tag "logo.gif" %></a>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div id="content">
+														<div class="width">
+															<table>
+																<tr>
+																	<td class="c1">
+																		<div class="c1" style="margin-top:10px">
+																		  
+																		  <ul>
+																		    <li><font size="6">Главная</font></li>
+																		    <li><font size="6"><%= link_to "Услуги", services_path %></font></li>
+																		    <li><font size="6">Галерея</font></li>
+																		    <li><font size="6">Партнёры</font></li>
+																		    <li><font size="6">Контакты</font></li>
+																		  </ul>
+                                      <!-- <jdoc:include type="modules" name="left" style="user" /> -->
+																		</div>
+																	</td>
+																	<td class="c2">
+																		<div class="indent">
+																			<div class="width">
+																			  <%= yield %>
+                                        <!-- <jdoc:include type="component" /> -->
+																			</div>
+																		</div>
+																	</td>
+																	<td class="c3">
+																		<div class="c3">
+																		  <div style="margin:10px">
+																		    <%= image_tag "Mann.jpg", :width => 150 %>
+  																		  Безумие… — понятие достаточно зыбкое, и люди мещанского склада произвольно орудуют им, руководствуясь сомнительными критериями. Границу разумного они проводят наспех и очень близко от себя и своих пошлых убеждений, а все, что находится за нею, объявляют сумасшествием.
+																		  </div>
+                                      <!-- <jdoc:include type="modules" name="right" style="user" /> -->
+																		</div>
+																	</td>
+																</tr>
+															</table>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="footer">
+		<div class="main"><div class="space">
+			<div>fooooooooooter</div>
+		</div></div>
+	</div>
+<!-- <jdoc:include type="modules" name="debug" /> -->
+</body>
+</html>
+
+
+
+
+
+
+</body>
+</html>

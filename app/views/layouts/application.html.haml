@@ -1,0 +1,28 @@
+!!! 5
+%html
+  %head
+    %title= yield :title
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application", 'swfobject'
+    = csrf_meta_tags
+    %meta{ :name => "description", :content => "Сайт праздничного агенства Каравелла"}
+    %meta{ :name => "keywords", :content => "Организация свадьбы, Свадьба, праздники, ведущие"}
+    %meta{ :name => "author", :content => "Караваева Н.Д."}
+    /= render :partial => '/layouts/yoxview'
+  %body
+    .stripe
+    .container
+      .row
+        .span2_5
+          .row
+            =link_to image_tag("logo.png"), welcome_path
+          .row.main_menu
+            %p= link_to "Главная", welcome_path
+            %p= link_to "Услуги", areas_path
+            %p= link_to "Галерея", galleries_path
+            %p= link_to "Партнёры", partners_path
+            %p= link_to "Контакты", contacts_path
+        .span9_5
+          .content
+            = yield
+      #yoxview

@@ -1,0 +1,21 @@
+
+.row
+  .span
+    = form_for(@area) do |f| 
+      - if @area.errors.any?
+        #error_explanation
+          %h2= "#{pluralize(@area.errors.count, "error")} prohibited this area from being saved:"
+          %ul
+            - @area.errors.full_messages.each do |msg| 
+              %li= msg
+      .row
+        .span
+          = f.label 'Название'
+          = f.text_field :name
+      .row
+        .span
+          = f.label 'Описание'
+          = f.text_area :description, :class => 'span9'
+      .row
+        .span
+          = f.submit 

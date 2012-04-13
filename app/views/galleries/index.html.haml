@@ -1,0 +1,33 @@
+=content_for :title do
+  Каравелла - Галерея
+
+%h1 Наши свадьбы
+.row
+  %ul.thumbnails
+  - @galleries.each_with_index do |gallery, i|
+    %li.span3
+      .thumbnail
+        =link_to image_tag("img#{i}.jpg"), gallery_photos_path(gallery), :class => 'thumbnail'
+        %h5= gallery.name
+        = link_to 'Edit', edit_gallery_path(gallery)
+        = link_to 'Destroy', gallery, confirm: 'Are you sure?', method: :delete
+        
+.row
+  .span
+    = link_to 'New Gallery', new_gallery_path
+
+/ <%  %>
+/   <tr>
+/     <td><%= gallery.name %></td>
+/     <td><%= gallery.description %></td>
+/     <td><%= gallery.photo_id %></td>
+/     <td><%= link_to 'Show', gallery %></td>
+/     <td></td>
+/     <td><% %></td>
+/   </tr>
+/ <% end %>
+/ </table>
+/ 
+/ <br />
+/ 
+/ <% %>

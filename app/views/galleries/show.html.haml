@@ -1,0 +1,17 @@
+=content_for :title do
+  ="Каравелла - Галерея - #{@gallery.name}"
+
+%h1= @gallery.name
+%p{:id => "notice"}= notice
+.row
+  %ul.thumbnails
+    - @gallery.photos.each do |photo|
+      %li.span3
+        ololo
+        .thumbnail
+          =image_tag photo.image_url.to_s
+          = link_to 'Edit', edit_gallery_path(gallery)
+          = link_to 'Destroy', gallery, confirm: 'Are you sure?', method: :delete
+.row
+  = link_to 'Добавить фото', new_gallery_photo_path(@gallery)
+/  = link_to 'Back', galleries_path

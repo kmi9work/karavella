@@ -1,0 +1,20 @@
+=content_for :title do
+  Каравелла - Услуги
+.navbar
+  .navbar-inner
+    .container{:style => "margin-top: 0px"}
+      .nav
+        - @areas.each do |area|
+          %li= link_to area.name.gsub(/<.*>/, '').sub("|","<br>").html_safe, area, :align => 'center'
+          /%li{:class => "divider-vertical"}
+          /= link_to 'Edit', edit_area_path(area) if admin_signed_in?
+          /= link_to 'Destroy', area, confirm: 'Are you sure?', method: :delete if admin_signed_in?    
+.row
+  .span
+    -if @area
+      =markdown @area.description
+      = link_to 'Edit', edit_area_path(@area) if admin_signed_in?
+      = link_to 'Destroy', "/areas/#{@area.id}", confirm: 'Are you sure?', method: :delete if admin_signed_in?
+.row
+  .span
+    = link_to 'Новая услуга', new_area_path if admin_signed_in?

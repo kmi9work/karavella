@@ -1,0 +1,13 @@
+%h1= @gallery.name
+%p{:id => "notice"}= notice
+.row
+  %ul.thumbnails
+    - @photos.each do |photo|
+      %li.span3
+        .thumbnail
+          = link_to image_tag(photo.image.thumb.url), photo.image_url, :class => 'thumbnail'
+          = link_to 'Destroy', gallery_photo_path(@gallery, photo), confirm: 'Are you sure?', method: :delete
+.row
+  .span
+    = link_to 'Добавить фото', new_gallery_photo_path(@gallery)
+/  = link_to 'Back', galleries_path

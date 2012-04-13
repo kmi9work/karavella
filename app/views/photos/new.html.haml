@@ -1,0 +1,14 @@
+.row
+  = form_for @photo, :url => gallery_photos_path(@gallery.id), :html => {:multipart => true} do |f|
+    - if @photo.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@photo.errors.count, "error")} prohibited this gallery from being saved:"
+        
+        %ul
+          - @photo.errors.full_messages.each do |msg|
+            %li= msg
+    = f.hidden_field :gallery_id
+    .field
+      = render :partial => "uploadify"
+    .actions
+      = f.submit "Загрузить фотографии"
