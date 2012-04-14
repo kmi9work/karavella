@@ -9,6 +9,8 @@ gem 'carrierwave'
 gem 'rmagick', "~> 2.12.0"
 gem 'markitup'
 gem 'redcarpet'
+gem 'therubyracer'
+gem 'execjs'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
