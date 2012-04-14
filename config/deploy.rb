@@ -90,7 +90,7 @@ end
 
 
   set :unicorn_start_cmd, "(cd #{deploy_to}/current; rvm use #{rvm_ruby_string} do bundle exec unicorn_rails -Dc #{unicorn_conf})"
-
+#rvm use #{rvm_ruby_string} do bundle exec rake assets:precompile;
 
 
 # - for unicorn - #
