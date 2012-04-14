@@ -14,5 +14,5 @@ production:
   adapter: mysql
   database: karavell_karav65
   username: karavell_karav65
-  password: karavell_karav65
+  password: vnLlWAgU
   host: mysql0.locum.ru
