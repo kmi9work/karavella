@@ -72,6 +72,7 @@ GEM
     markitup (0.0.1)
     mime-types (1.18)
     multi_json (1.2.0)
+    mysql (2.8.1)
     mysql2 (0.3.11)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
@@ -144,6 +145,7 @@ DEPENDENCIES
   haml
   jquery-rails
   markitup
+  mysql
   mysql2
   rails (= 3.2.3)
   redcarpet
