@@ -31,6 +31,12 @@ GEM
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
     builder (3.0.0)
+    capistrano (2.6.0)
+      highline
+      net-scp (>= 1.0.0)
+      net-sftp (>= 2.0.0)
+      net-ssh (>= 2.0.14)
+      net-ssh-gateway (>= 1.1.0)
     carrierwave (0.6.1)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
@@ -50,6 +56,7 @@ GEM
     execjs (1.3.0)
       multi_json (~> 1.0)
     haml (3.1.4)
+    highline (1.6.11)
     hike (1.2.1)
     i18n (0.6.0)
     journey (1.0.3)
@@ -64,6 +71,13 @@ GEM
     markitup (0.0.1)
     mime-types (1.18)
     multi_json (1.2.0)
+    net-scp (1.0.4)
+      net-ssh (>= 1.99.1)
+    net-sftp (2.0.5)
+      net-ssh (>= 2.0.9)
+    net-ssh (2.3.0)
+    net-ssh-gateway (1.1.0)
+      net-ssh (>= 1.99.1)
     orm_adapter (0.0.7)
     polyglot (0.3.3)
     rack (1.4.1)
@@ -92,7 +106,7 @@ GEM
     rdoc (3.12)
       json (~> 1.4)
     redcarpet (2.1.1)
-    rmagick (2.13.1)
+    rmagick (2.12.2)
     sass (3.1.15)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
@@ -119,6 +133,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  capistrano
   carrierwave
   coffee-rails (~> 3.2.1)
   devise (~> 2.0.4)
@@ -127,7 +142,7 @@ DEPENDENCIES
   markitup
   rails (= 3.2.3)
   redcarpet
-  rmagick
+  rmagick (~> 2.12.0)
   sass-rails (~> 3.2.3)
   sqlite3
   uglifier (>= 1.0.3)

@@ -6,7 +6,7 @@ gem "devise", "~> 2.0.4"
 gem "haml"
 
 gem 'carrierwave'
-gem 'rmagick'
+gem 'rmagick', "~> 2.12.0"
 gem 'markitup'
 gem 'redcarpet'
 
@@ -40,7 +40,7 @@ gem 'jquery-rails'
 # gem 'unicorn'
 
 # Deploy with Capistrano
-# gem 'capistrano'
+gem 'capistrano'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
