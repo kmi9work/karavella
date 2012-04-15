@@ -4,7 +4,7 @@
     <div class="container" style="margin-top: 0px">
       <div class="nav">
         <% @areas.each do |area| %>
-          <li><%#= link_to area.name.gsub(/<.*>/, '').sub("|","<br>").html_safe, area, :align => 'center' %></li>
+          <li><%= link_to area.name.gsub(/<.*>/, '').sub("|","<br>").html_safe, area, :align => 'center' %></li>
            <!-- <li class = "divider-vertical"> -->
             <%#=  link_to 'Edit', edit_area_path(area) if admin_signed_in? %> 
             <%#=  link_to 'Destroy', area, confirm: 'Are you sure?', method: :delete if admin_signed_in?     %> 
@@ -16,7 +16,7 @@
 <div class="row">
   <div class="span">
     <% if @area %>
-      <%#= markdown @area.description %>
+      <%= markdown @area.description %>
       <%=  link_to 'Edit', edit_area_path(@area) if admin_signed_in? %>
       <%=  link_to 'Destroy', "/areas/#{@area.id}", confirm: 'Are you sure?', method: :delete if admin_signed_in? %>
     <% end %>
@@ -24,6 +24,6 @@
 </div>
 <div class="row">
   <div class="span">
-    <%#=  link_to 'New service', new_area_path if admin_signed_in? %>
+    <%=  link_to 'New service', new_area_path if admin_signed_in? %>
   </div>
 </div>
