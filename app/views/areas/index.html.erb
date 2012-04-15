@@ -1,4 +1,4 @@
- <!-- <%= content_for(:title){t :title_areas} %> -->
+<%= content_for(:title){t :title_areas} %>
 <div class="navbar">
   <div class="navbar-inner">
     <div class="container" style="margin-top: 0px">
@@ -13,7 +13,7 @@
     </div>
   </div>
 </div>
-<!-- <div class="row">
+<div class="row">
   <div class="span">
     <% if @area %>
       <%= markdown @area.description %>
@@ -26,4 +26,4 @@
   <div class="span">
     <%=  link_to 'New service', new_area_path if admin_signed_in? %>
   </div>
-</div> -->
+</div>
