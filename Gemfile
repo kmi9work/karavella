@@ -12,6 +12,8 @@ gem 'redcarpet'
 gem 'therubyracer'
 gem 'execjs'
 
+gem 'ruby-mysql'
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
