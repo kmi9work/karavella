@@ -16,6 +16,7 @@
 <div class="row">
   <div class="span">
     <% if @area %>
+      10
       <%= @area.description.encoding %>
       <%#= markdown @area.description %>
       <%=  link_to 'Edit', edit_area_path(@area) if admin_signed_in? %>
