@@ -1,4 +1,4 @@
-<%# coding: utf-8 %>
+<%#coding: utf-8 %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -6,9 +6,9 @@
     <%= stylesheet_link_tag    "application", :media => "all" %>
     <%= javascript_include_tag "application", 'swfobject' %>
     <%= csrf_meta_tags %>
-    <meta name="description" content="Сайт праздничного агенства Каравелла">
-    <meta name="keywords" content="Организация свадьбы, Свадьба, праздники, ведущие">
-    <meta name="author" content="Караваева Н.Д.">
+    <meta name="description" content="<%= t :description %>">
+    <meta name="keywords" content="<%= t :keywords %>">
+    <meta name="author" content="<%= t :author %>">
     <!-- /= render :partial => '/layouts/yoxview' -->
   </head>
   <body>
@@ -21,11 +21,11 @@
             <%= link_to image_tag("logo.png"), welcome_path %>
           </div>
           <div class="row main_menu">
-            <p><%=  link_to "Главная", welcome_path %></p>
-            <p><%=  link_to "Услуги", areas_path %></p>
-            <p><%=  link_to "Галерея", galleries_path %></p>
-            <p><%=  link_to "Партнёры", partners_path %></p>
-            <p><%=  link_to "Контакты", contacts_path %></p>
+            <p><%=  link_to t(:main), welcome_path %></p>
+            <p><%=  link_to t(:areas), areas_path %></p>
+            <p><%=  link_to t(:gallery), galleries_path %></p>
+            <p><%=  link_to t(:partners), partners_path %></p>
+            <p><%=  link_to t(:contacts), contacts_path %></p>
           </div>
         </div>
         <div class="span9_5">

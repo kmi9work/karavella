@@ -1,7 +1,5 @@
-<%= content_for :title do %>
-  Каравелла - Галерея
-<% end %>
-<h1>Наши свадьбы</h1>
+<%= content_for(:title){t :title_gallery} %>
+<h1><%= t :our_weddings %></h1>
 <div class="row">
   <ul class="thumbnails">
     <% @galleries.each_with_index do |gallery, i| %>
@@ -9,15 +7,17 @@
         <div class="thumbnail">
           <%= link_to image_tag("img#{i}.jpg"), gallery_photos_path(gallery), :class => 'thumbnail' %>
           <h5><%= gallery.name %></h5>
-          <%= link_to 'Edit', edit_gallery_path(gallery) %>
-          <%= link_to 'Destroy', gallery, confirm: 'Are you sure?', method: :delete %>
+          <%= link_to 'Edit', edit_gallery_path(gallery) if admin_signed_in?%>
+          <%= link_to 'Destroy', gallery, confirm: 'Are you sure?', method: :delete if admin_signed_in?%>
         </div>
       </li>
     <% end %>
   </ul>
 </div>
-<div class="row">
-  <div class="span">
-    <%= link_to 'New Gallery', new_gallery_path %>
+<% if admin_signed_in? %>
+  <div class="row">
+    <div class="span">
+      <%= link_to 'New Gallery', new_gallery_path %>
+    </div>
   </div>
-</div>
+<% end %>
