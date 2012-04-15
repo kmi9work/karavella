@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%=  yield :title %></title>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application", 'swfobject' %>
+    <%= csrf_meta_tags %>
+    <meta name="description" content="Сайт праздничного агенства Каравелла">
+    <meta name="keywords" content="Организация свадьбы, Свадьба, праздники, ведущие">
+    <meta name="author" content="Караваева Н.Д.">
+    <!-- /= render :partial => '/layouts/yoxview' -->
+  </head>
+  <body>
+    <div class="stripe">
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="span2_5">
+          <div class="row">
+            =link_to image_tag("logo.png"), welcome_path
+          </div>
+          <div class="row main_menu">
+            <p><%=  link_to "Главная", welcome_path %></p>
+            <p><%=  link_to "Услуги", areas_path %></p>
+            <p><%=  link_to "Галерея", galleries_path %></p>
+            <p><%=  link_to "Партнёры", partners_path %></p>
+            <p><%=  link_to "Контакты", contacts_path %></p>
+          </div>
+        </div>
+        <div class="span9_5">
+          <div class="content">
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+      <div id="yoxview">
+      </div>
+    </div>
+  </body>
+</html>
