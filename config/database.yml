@@ -5,6 +5,7 @@ development:
   password: 
   socket: /tmp/mysql.sock
   host: localhost
+  encoding: utf-8
 # test:
 #   adapter: mysql
 #   database: library_test
@@ -17,3 +18,4 @@ production:
   username: karavell_karav65
   password: vnLlWAgU
   host: mysql0.locum.ru
+  encoding: utf-8
