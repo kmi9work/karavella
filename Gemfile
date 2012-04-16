@@ -12,13 +12,14 @@ gem 'redcarpet'
 gem 'therubyracer'
 gem 'execjs'
 
-gem 'ruby-mysql'
+# gem 'ruby-mysql'
+gem 'postgres'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2'
-gem 'mysql'
+# gem 'mysql2'
+# gem 'mysql'
 
 # Gems used only for assets and not required
 # in production environments by default.

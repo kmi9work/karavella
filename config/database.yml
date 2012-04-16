@@ -13,9 +13,9 @@ development:
 #   password: 
 #   host: localhost
 production:
-  adapter: mysql
-  database: karavell_karav65
-  username: karavell_karav65
-  password: vnLlWAgU
-  host: mysql0.locum.ru
+  adapter: postgresql
+  database: karavell_karav85
+  username: karavell_karav85
+  password: zDkz57Rao6iUGCJ4__
+  host: postgresql0.locum.ru
   encoding: utf8
