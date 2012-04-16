@@ -13,7 +13,7 @@ gem 'therubyracer'
 gem 'execjs'
 
 # gem 'ruby-mysql'
-gem 'postgres'
+gem 'pg'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
