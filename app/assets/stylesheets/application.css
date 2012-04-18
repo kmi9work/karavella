@@ -18,6 +18,19 @@
 p{
   font: 30px;
 }
+.oval{
+  border: 1px solid black;
+  border-radius: 25px;
+  margin-top: 10px;
+}
+a:hover{
+  color: #117f77 !important;
+  text-decoration: none !important; 
+}
+div.oval:hover{
+  background: #ccc;
+}
+
 body{
 /*  background: #888888 url('/assets/bg.gif') repeat;*/
 }
