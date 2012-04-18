@@ -15,6 +15,9 @@
 *{
   font-family: 'Comfortaa', sans-serif;
 }
+p{
+  font: 30px;
+}
 body{
 /*  background: #888888 url('/assets/bg.gif') repeat;*/
 }
