@@ -24,11 +24,12 @@
   margin-top: 10px;
 }
 a:hover{
-  color: #117f77 !important;
+  color: #ccc;
+/*  color: #117f77 !important;*/
   text-decoration: none !important; 
 }
 div.oval:hover{
-  background: #ccc;
+  background: #555;
 }
 
 body{
