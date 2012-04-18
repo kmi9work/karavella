@@ -59,6 +59,12 @@ body{
   background: #fff;
   padding: 10px;
 }
+.frame{
+  border: 1px solid black;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  border-radius: 25px;
+}
 
 .thumbnails{
   padding-left: 20px;
