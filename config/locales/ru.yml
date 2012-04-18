@@ -2,11 +2,11 @@ ru:
   description: Сайт праздничного агенства Каравелла
   keywords: Организация свадьбы, Свадьба, праздники, ведущие 
   author: Караваева Н.Д.
-  main: ГЛАВНАЯ
-  areas: УСЛУГИ
-  gallery: ГАЛЕРЕЯ
-  partners: ПАРТНЕРЫ
-  contacts: КОНТАКТЫ
+  main: главная
+  areas: услуги
+  gallery: галерея
+  partners: партнеры
+  contacts: контакты
   title_areas: Каравелла - Услуги
   title_gallery: Каравелла - Галерея
   title_welcome: Праздничное агентство "Каравелла"

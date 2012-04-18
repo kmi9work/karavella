@@ -12,8 +12,8 @@
  *= require_tree .
 */
 
-*{
-  font-family: 'Comfortaa', sans-serif;
+body{
+  font-family: 'Comfortaa', "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .oval{
@@ -24,11 +24,12 @@
   margin-top: 10px;
 }
 a:hover{
-  color: #ccc;
+  color: #ccc !important;
 /*  color: #117f77 !important;*/
   text-decoration: none !important; 
 }
 div.oval:hover{
+  color: #ccc !important;
   background: #555;
 }
 
