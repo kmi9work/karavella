@@ -15,9 +15,7 @@
 *{
   font-family: 'Comfortaa', sans-serif;
 }
-p{
-  font: 30px;
-}
+
 .oval{
   border: 1px solid black;
   -webkit-border-radius: 25px;
@@ -51,7 +49,7 @@ body{
 }  
 */
 .main_menu p{
-  font-size: 30px;
+  font-size: 22px;
   padding-top: 7px;
 }
 .main_menu a{
