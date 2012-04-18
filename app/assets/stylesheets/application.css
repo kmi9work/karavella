@@ -12,7 +12,7 @@
  *= require_tree .
 */
 body{
-  background: #888888 url('/assets/bg.gif') repeat;
+/*  background: #888888 url('/assets/bg.gif') repeat;*/
 }
 .stripe{
   z-index: -10;
@@ -21,7 +21,7 @@ body{
   left:0px;
   width: 100%;
   height: 199px;
-  background: #fff url('/assets/stripe.jpg') repeat-x;
+/*  background: #fff url('/assets/stripe.jpg') repeat-x;*/
 }
 .main_menu{
   padding-top: 10px;
