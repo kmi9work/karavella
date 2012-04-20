@@ -1,11 +1,8 @@
 development:
-  adapter: mysql
-  database: library_development
-  username: root
-  password: 
-  socket: /tmp/mysql.sock
-  host: localhost
-  encoding: utf8
+  adapter: sqlite3
+  database: nadya.sqlite
+  pool: 5 
+  timeout: 5000
 # test:
 #   adapter: mysql
 #   database: library_test

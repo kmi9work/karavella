@@ -1,5 +1,6 @@
 class PhotosController < ApplicationController
   before_filter :authenticate_admin!, :only => [:new, :create, :edit, :update, :destroy]
+  before_filter :make_current_admin, :only => :new
   protect_from_forgery :except => :create #!!!
   def index
     @photos = Photo.all
@@ -22,7 +23,7 @@ class PhotosController < ApplicationController
     respond_to do |format|
       if @photo.save
         format.html { redirect_to gallery_photos_path(@photo.gallery), notice: 'Photo was successfully created.' }
-        format.js
+        format.js 
       else
         format.html { render action: "new" }
         format.json 
@@ -37,6 +38,12 @@ class PhotosController < ApplicationController
     respond_to do |format|
       format.html { redirect_to gallery_photos_path(gallery) }
       format.json { head :no_content }
+    end
+  end
+  def make_current_admin
+    if admin_signed_in?
+      @admin = current_admin 
+      @admin.reset_authentication_token!
     end
   end
 end

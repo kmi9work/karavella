@@ -3,7 +3,7 @@
 .row
   %ul.thumbnails
     - @photos.each do |photo|
-      %li.span3
+      %li.span2_5
         .thumbnail
           = link_to image_tag(photo.image.thumb.url), photo.image_url, :class => 'thumbnail'
           = link_to 'Destroy', gallery_photo_path(@gallery, photo), confirm: 'Are you sure?', method: :delete

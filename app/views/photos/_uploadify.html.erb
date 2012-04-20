@@ -4,7 +4,7 @@
   var uploadify_script_data = {};
   $('#uploadify').uploadify({
     uploader        : '/assets/uploadify.swf',
-    script          : '<%= gallery_photos_path %>',
+    script          : '<%= gallery_photos_path(:gallery_id => @gallery.id, :auth_token => @admin.authentication_token, :format => :json) %>',
     buttonText      : 'Select files',
     cancelImg       : '/assets/cancel.png',
     auto            : true,
