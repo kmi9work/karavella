@@ -14,4 +14,5 @@
 //= require jquery_ujs
 //= require swfobject
 //= require jquery.uploadify
-//= require yoxview-init
+
+/* require yoxview-init*/
