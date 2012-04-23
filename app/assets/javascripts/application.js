@@ -15,3 +15,4 @@
 //= require swfobject
 //= require jquery.uploadify
 //= require yoxview-init
+//= require jquery.yoxview-2.21.min

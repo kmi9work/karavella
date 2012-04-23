@@ -1,5 +1,8 @@
 <script type="text/javascript">
   $(document).ready(function(){
-    $(".yoxview").yoxview();		    
+    $(".yoxview").yoxview({
+      imagesFolder: 'assets/'
+      /*allowedUrls: /^\/assets\/\d+\/(thumb|original)$/i*/
+    });
   });		
 </script>
