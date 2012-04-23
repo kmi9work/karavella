@@ -10,182 +10,230 @@
  *
  * Date: 13th November, 2010
  * Version : 2.2
- */ 
+ */
 
 
-(function($){
+ (function($) {
     if (!$.yoxview)
-        $.yoxview = new YoxView();
-        
-    $.fn.yoxview = function(options) 
+    $.yoxview = new YoxView();
+
+    $.fn.yoxview = function(options)
     {
         if (this.length != 0)
         {
             if ($.yoxview[options])
-                return $.yoxview[options].apply(this, Array.prototype.slice.call(arguments, 1));
+            return $.yoxview[options].apply(this, Array.prototype.slice.call(arguments, 1));
             else if (typeof options === 'object' || !options)
-                $.yoxview.init(this, options);
+            $.yoxview.init(this, options);
             else
-              $.error( 'Method ' +  options + ' does not exist on YoxView.' );
+            $.error('Method ' + options + ' does not exist on YoxView.');
         }
         return this;
     };
-    
-    $(Yox.getTopWindow()).unload(function(){
+
+    $(Yox.getTopWindow()).unload(function() {
         if ($.yoxview)
         {
             $.yoxview.unload();
             delete $.yoxview;
         }
     });
-    
+
     function YoxView()
     {
-        var yoxviewPath = (yoxviewPath || Yox.getPath(/(.*\/)jquery\.yoxview/i));
+        var yoxviewPath = "/assets/";
         var defaults = {
-            autoHideInfo: true, // If false, the info bar (with image count and title) is always displayed.
-            autoPlay: false, // If true, slideshow mode starts when the popup opens
+            autoHideInfo: true,
+            // If false, the info bar (with image count and title) is always displayed.
+            autoPlay: false,
+            // If true, slideshow mode starts when the popup opens
             backgroundColor: "#000000",
             backgroundOpacity: 0.8,
-            buttonsFadeTime: 300, // The time, in milliseconds, it takes the buttons to fade in/out when hovered on. Set to 0 to force the Prev/Next buttons to remain visible.
-            cacheBuffer: 5, // The number of images to cache after the current image (directional, depends on the current viewing direction)
-            cacheImagesInBackground: true, // If true, full-size images are cached even while the gallery hasn't been opened yet.
-            controlsInitialFadeTime: 1500, // The time, in milliseconds, it takes the menu and prev/next buttons to fade in and out when the popup is opened.
-            controlsInitialDisplayTime: 1000, // The time, in milliseconds, to display the menu and prev/next buttons when the popup is opened. Set to 0 to not display them by default
+            buttonsFadeTime: 300,
+            // The time, in milliseconds, it takes the buttons to fade in/out when hovered on. Set to 0 to force the Prev/Next buttons to remain visible.
+            cacheBuffer: 5,
+            // The number of images to cache after the current image (directional, depends on the current viewing direction)
+            cacheImagesInBackground: true,
+            // If true, full-size images are cached even while the gallery hasn't been opened yet.
+            controlsInitialFadeTime: 1500,
+            // The time, in milliseconds, it takes the menu and prev/next buttons to fade in and out when the popup is opened.
+            controlsInitialDisplayTime: 1000,
+            // The time, in milliseconds, to display the menu and prev/next buttons when the popup is opened. Set to 0 to not display them by default
             dataFolder: yoxviewPath + "data/",
-            defaultDimensions: { // Default sizes for different types of media, in case none was specified
-                flash: { width: 720, height: 560 },
-                iframe: { width: 1024 }
+            defaultDimensions: {
+                // Default sizes for different types of media, in case none was specified
+                flash: {
+                    width: 720,
+                    height: 560
+                },
+                iframe: {
+                    width: 1024
+                }
             },
-            flashVideoPlayer: "jwplayer", // The default player for Flash video files
-            imagesFolder: yoxviewPath + "images/",
+            flashVideoPlayer: "jwplayer",
+            // The default player for Flash video files
+            imagesFolder: yoxviewPath,
             infoBackColor: "#000000",
             infoBackOpacity: 0.5,
-            isRTL : false, // Switch direction. For RTL languages such as Hebrew or Arabic, for example.
-            lang: "en", // The language for texts. The relevant language file should exist in the lang folder.
+            isRTL: false,
+            // Switch direction. For RTL languages such as Hebrew or Arabic, for example.
+            lang: "ru",
+            // The language for texts. The relevant language file should exist in the lang folder.
             langFolder: yoxviewPath,
-            loopPlay: true, // If true, slideshow play starts over after the last image
-            playDelay: 3000, // Time in milliseconds to display each image
-            popupMargin: 20, // the minimum margin between the popup and the window
-            popupResizeTime: 600, // The time in milliseconds it takes to make the resize transition from one image to the next.
-            renderButtons: true, // Set to false if you want to implement your own Next/Prev buttons, using the API.
-            renderMenu: true, // Set to false if you want to implement you own menu (Play/Help/Close).
-            showBarsOnOpen: true, // If true, displays the top (help) bar and bottom (info) bar momentarily when the popup opens.
-            showButtonsOnOpen: true, // If true, displays the Prev/Next buttons momentarily when the popup opens.
-            showDescription: true, // Set to false to not show the description text (the title will still show).
-            textLinksSelector: ".yoxviewLink", // A jQuery selector to identify links that are not thumbnails, which YoxView should try to open.
-            thumbnailsOptions: { thumbnailsClass: "yoxview_thumbnail" }, // Options for thumbnails generated by YoxView
-            titleAttribute: "title", // The attribute of an img used for the text in YoxView. Use either "title" or "alt".
-            titleDisplayDuration: 2000 // The time in ms to display the image's title, after which it fades out.
+            loopPlay: true,
+            // If true, slideshow play starts over after the last image
+            playDelay: 3000,
+            // Time in milliseconds to display each image
+            popupMargin: 20,
+            // the minimum margin between the popup and the window
+            popupResizeTime: 600,
+            // The time in milliseconds it takes to make the resize transition from one image to the next.
+            renderButtons: true,
+            // Set to false if you want to implement your own Next/Prev buttons, using the API.
+            renderMenu: true,
+            // Set to false if you want to implement you own menu (Play/Help/Close).
+            showBarsOnOpen: true,
+            // If true, displays the top (help) bar and bottom (info) bar momentarily when the popup opens.
+            showButtonsOnOpen: true,
+            // If true, displays the Prev/Next buttons momentarily when the popup opens.
+            showDescription: true,
+            // Set to false to not show the description text (the title will still show).
+            textLinksSelector: ".yoxviewLink",
+            // A jQuery selector to identify links that are not thumbnails, which YoxView should try to open.
+            thumbnailsOptions: {
+                thumbnailsClass: "yoxview_thumbnail"
+            },
+            // Options for thumbnails generated by YoxView
+            titleAttribute: "title",
+            // The attribute of an img used for the text in YoxView. Use either "title" or "alt".
+            titleDisplayDuration: 2000
+            // The time in ms to display the image's title, after which it fades out.
         };
-        
+
         this.infoButtons = {};
         this.isOpen = false;
         this.yoxviewSkins = {};
-        
+
         var ajaxLoader,
-            cacheVars = {},
-            cacheImg = new Image(),
-            countDisplay,
-            ctlButtons, // next and prev buttons
-            elementCount = 0,
-            currentItemIndex = 0,
-            currentLanguage = {},
-            currentMaxSize = {},
-            currentOptionsSetIndex,
-            currentViewIndex = 0,
-            currentViewIsInFrame = window != window.parent,
-            disableInfo = false,
-            flashDefaults = { wmode: "transparent", width: "100%", height: "100%", allowfullscreen: "true", allowscriptaccess: "true", hasVersion: 9 },
-            firstImage = true,
-            frameOffset,
-            helpPanel,
-            hideInfoTimeout,
-            hideMenuTimeout,
-            image1, image2,
-            images,
-            imagesCount = 0,
-            infoPanel,
-            infoPanelContent,
-            infoPanelLink,
-            infoPanelMinHeight = 30,
-            infoPanelWrap,
-            infoPinLink,
-            infoPinLinkImg,
-            infoText,
-            isFirstPanel = false,
-            isImageMode = true,
-            isPlaying = false,
-            isResizing = false,
-            itemVar,
-            loadedViews = [],
-            loaderTimeout,
-            loading = false,
-            mediaButtonsSize = {width: 100, height: 100},
-            mediaLoader,
-            mediaPanelClass = "yoxview_mediaPanel",
-            mediaProviderUrls = {
-                vimeo: "http://vimeo.com/api/oembed.json",
-                myspace: "http://vids.myspace.com/index.cfm?fuseaction=oembed"
-            },
-            menuHidePosition = -42,
-            menuPanel,
-            nextBtn,
-            notification,
-            onOpenCallback,
-            options, optionsSets = [],
-            panel1, panel2,
-	        playBtnText,
-            popup,
-            popupBackground,
-            popupMargins = {}, defaultPopupMargins = {},
-            popupTimeout,
-            popupWindow = $(Yox.getTopWindow()), // the window in which to create the YoxView popup (for use with frames)
-            popupWrap,
-            prevBtn,
-            resumePlay = false,
-            sprites,
-            tempImg = new Image(),
-            thumbnail,
-            thumbnailImg,
-            thumbnailPos,
-            thumbnailProperties,
-            windowDimensions,
-            yoxviewLanguages = {},
-            keyCodes = {
-	            40: 'DOWN',
-	            35: 'END',
-	            13: 'ENTER',
-	            36: 'HOME',
-	            37: 'LEFT',
-	            39: 'RIGHT',
-	            32: 'SPACE',
-	            38: 'UP',
-	            72: 'h',
-	            27: 'ESCAPE'
-            },
-            keyMappings;
+        cacheVars = {},
+        cacheImg = new Image(),
+        countDisplay,
+        ctlButtons,
+        // next and prev buttons
+        elementCount = 0,
+        currentItemIndex = 0,
+        currentLanguage = {},
+        currentMaxSize = {},
+        currentOptionsSetIndex,
+        currentViewIndex = 0,
+        currentViewIsInFrame = window != window.parent,
+        disableInfo = false,
+        flashDefaults = {
+            wmode: "transparent",
+            width: "100%",
+            height: "100%",
+            allowfullscreen: "true",
+            allowscriptaccess: "true",
+            hasVersion: 9
+        },
+        firstImage = true,
+        frameOffset,
+        helpPanel,
+        hideInfoTimeout,
+        hideMenuTimeout,
+        image1,
+        image2,
+        images,
+        imagesCount = 0,
+        infoPanel,
+        infoPanelContent,
+        infoPanelLink,
+        infoPanelMinHeight = 30,
+        infoPanelWrap,
+        infoPinLink,
+        infoPinLinkImg,
+        infoText,
+        isFirstPanel = false,
+        isImageMode = true,
+        isPlaying = false,
+        isResizing = false,
+        itemVar,
+        loadedViews = [],
+        loaderTimeout,
+        loading = false,
+        mediaButtonsSize = {
+            width: 100,
+            height: 100
+        },
+        mediaLoader,
+        mediaPanelClass = "yoxview_mediaPanel",
+        mediaProviderUrls = {
+            vimeo: "http://vimeo.com/api/oembed.json",
+            myspace: "http://vids.myspace.com/index.cfm?fuseaction=oembed"
+        },
+        menuHidePosition = -42,
+        menuPanel,
+        nextBtn,
+        notification,
+        onOpenCallback,
+        options,
+        optionsSets = [],
+        panel1,
+        panel2,
+        playBtnText,
+        popup,
+        popupBackground,
+        popupMargins = {},
+        defaultPopupMargins = {},
+        popupTimeout,
+        popupWindow = $(Yox.getTopWindow()),
+        // the window in which to create the YoxView popup (for use with frames)
+        popupWrap,
+        prevBtn,
+        resumePlay = false,
+        sprites,
+        tempImg = new Image(),
+        thumbnail,
+        thumbnailImg,
+        thumbnailPos,
+        thumbnailProperties,
+        windowDimensions,
+        yoxviewLanguages = {},
+        keyCodes = {
+            40: 'DOWN',
+            35: 'END',
+            13: 'ENTER',
+            36: 'HOME',
+            37: 'LEFT',
+            39: 'RIGHT',
+            32: 'SPACE',
+            38: 'UP',
+            72: 'h',
+            27: 'ESCAPE'
+        },
+        keyMappings;
 
         // If the given options object is equal to any in the options set, return the existing set's index. Otherwise, add the new set and return its index:
-        function initOptionsSet(options){
+        function initOptionsSet(options) {
             var optionsSetsLength = optionsSets.length;
-            for(var i=0; i<optionsSetsLength; i++)
+            for (var i = 0; i < optionsSetsLength; i++)
             {
                 if (Yox.compare(optionsSets[i], options))
-                    return i;
+                return i;
             }
 
             optionsSets.push(options);
             return optionsSetsLength;
         }
-        
-        function getAllowedThumbnailsSelector(options){
-            return "a:has(img)" + (options.textLinksSelector !== null ? ",a" + options.textLinksSelector : "");
+
+        function getAllowedThumbnailsSelector(options) {
+            return "a:has(img)" + (options.textLinksSelector !== null ? ",a" + options.textLinksSelector: "");
         }
-        
+
         this.init = function(views, opt)
         {
-            var options = $.extend(true, {}, defaults, opt);
+            var options = $.extend(true, {},
+            defaults, opt);
             var optionsSetIndex;
             if (optionsSets.length == 0)
             {
@@ -193,138 +241,156 @@
                 optionsSetIndex = 0;
             }
             else
-                optionsSetIndex = opt ? initOptionsSet(options) : null;
-            
-            function loadContents(){
-                views.each(function(i, view){
+            optionsSetIndex = opt ? initOptionsSet(options) : null;
+
+            function loadContents() {
+                views.each(function(i, view) {
                     view = $(view);
                     var viewIndex = loadedViews.length;
-                    
+
                     view.data("yoxview", {
-                        viewIndex : viewIndex, 
-                        cacheVars: {cachedImagesCount: 0, cacheDirectionForward: true, cacheBufferLastIndex: null, currentCacheImg: 0 }
+                        viewIndex: viewIndex,
+                        cacheVars: {
+                            cachedImagesCount: 0,
+                            cacheDirectionForward: true,
+                            cacheBufferLastIndex: null,
+                            currentCacheImg: 0
+                        }
                     });
-                    
+
                     var viewData = view.data("yoxview");
                     if (optionsSetIndex)
-                        viewData.optionsSet = optionsSetIndex;
-                    
+                    viewData.optionsSet = optionsSetIndex;
+
                     options.allowedImageUrls = [Yox.Regex.image];
                     if (options.allowedUrls)
-                        options.allowedImageUrls = options.allowedImageUrls.concat(options.allowedUrls);
-                                
+                    options.allowedImageUrls = options.allowedImageUrls.concat(options.allowedUrls);
+
                     // First, get image data from thumbnails:
-		            var isSingleLink = view[0].tagName == "A";
-                    var thumbnails = isSingleLink ? view : view.find(getAllowedThumbnailsSelector(options));
-                    
+                    var isSingleLink = view[0].tagName == "A";
+                    var thumbnails = isSingleLink ? view: view.find(getAllowedThumbnailsSelector(options));
+
                     var viewImages = [];
 
                     var imageIndex = 0;
-                    thumbnails.each(function(i, thumbnail){
+                    thumbnails.each(function(i, thumbnail) {
                         var $thumbnail = $(thumbnail);
                         var imageData = getImageDataFromThumbnail($thumbnail, options);
                         if (imageData)
                         {
                             viewImages.push(imageData);
                             if (isSingleLink)
-                                $thumbnail.data("yoxview").imageIndex = imageIndex;
+                            $thumbnail.data("yoxview").imageIndex = imageIndex;
                             else
-                                $thumbnail.data("yoxview", { imageIndex: imageIndex, viewIndex: viewIndex });
+                            $thumbnail.data("yoxview", {
+                                imageIndex: imageIndex,
+                                viewIndex: viewIndex
+                            });
                             imageIndex++;
                         }
                     });
 
                     if (options.images)
-                        viewImages = viewImages.concat(options.images);
+                    viewImages = viewImages.concat(options.images);
 
                     if (options.dataSource)
-                    {                       
-                        Yox.dataSources[options.dataSource].getImagesData(options, function(data){
+                    {
+                        Yox.dataSources[options.dataSource].getImagesData(options,
+                        function(data) {
                             viewImages = viewImages.concat(data.images);
                             viewData.images = viewImages;
 
-                            if (data.title && options.thumbnailsOptions && options.thumbnailsOptions.setHeader){
+                            if (data.title && options.thumbnailsOptions && options.thumbnailsOptions.setHeader) {
                                 $(options.thumbnailsOptions.headerElement || "<h2>", {
                                     html: data.title,
                                     className: options.thumbnailsOptions.headerClass
                                 }).appendTo(view);
                             }
-                            var thumbnailsData = data.isGroup 
-                                ? [$.extend(data, {
-                                    media: {
-                                        title: data.title + " (" + data.images.length + " images)",
-                                        alt: data.title
-                                    }
-                                })]
-                                : data.images;
-
-                            createThumbnails(view, options, isSingleLink ? null : thumbnailsData, !data.createGroups ? null :
-                                function(e){
-                                    var viewData = $(e.currentTarget).data("yoxview");
-                                    var thumbnail = $(e.currentTarget);
-                                    var thumbnailData = thumbnail.data("yoxthumbs");
-                                    if (!viewData.imagesAreSet)
-                                    {
-                                        thumbnail.css("cursor", "wait");
-                                        var newOptions = $.extend({}, options);
-                                            
-                                        if (!newOptions.dataSourceOptions)
-                                            newOptions.dataSourceOptions = thumbnailData;
-                                        else
-                                            $.extend(newOptions.dataSourceOptions, thumbnailData);
-
-                                        Yox.dataSources[options.dataSource].getImagesData(newOptions, function(data){
-                                            viewData.images = data.images;
-                                            viewData.imagesAreSet = true;
-                                            thumbnail.css("cursor", "");
-                                            $.yoxview.open(viewData.viewIndex);
-                                        });
-                                    }
-                                    else
-                                    {
-                                        $.yoxview.open(viewData.viewIndex);
-                                    }
+                            var thumbnailsData = data.isGroup
+                            ? [$.extend(data, {
+                                media: {
+                                    title: data.title + " (" + data.images.length + " images)",
+                                    alt: data.title
                                 }
+                            })]
+                            : data.images;
+
+                            createThumbnails(view, options, isSingleLink ? null: thumbnailsData, !data.createGroups ? null:
+                            function(e) {
+                                var viewData = $(e.currentTarget).data("yoxview");
+                                var thumbnail = $(e.currentTarget);
+                                var thumbnailData = thumbnail.data("yoxthumbs");
+                                if (!viewData.imagesAreSet)
+                                {
+                                    thumbnail.css("cursor", "wait");
+                                    var newOptions = $.extend({},
+                                    options);
+
+                                    if (!newOptions.dataSourceOptions)
+                                    newOptions.dataSourceOptions = thumbnailData;
+                                    else
+                                    $.extend(newOptions.dataSourceOptions, thumbnailData);
+
+                                    Yox.dataSources[options.dataSource].getImagesData(newOptions,
+                                    function(data) {
+                                        viewData.images = data.images;
+                                        viewData.imagesAreSet = true;
+                                        thumbnail.css("cursor", "");
+                                        $.yoxview.open(viewData.viewIndex);
+                                    });
+                                }
+                                else
+                                {
+                                    $.yoxview.open(viewData.viewIndex);
+                                }
+                            }
                             );
-				            if (data.createGroups)
-				                $.each(view.yoxthumbs("thumbnails"), function(i, thumbnail){
-					                thumbnail.data("yoxview", {viewIndex: ++viewIndex});
-					                loadedViews.push($(thumbnail));
-				                });
+                            if (data.createGroups)
+                            $.each(view.yoxthumbs("thumbnails"),
+                            function(i, thumbnail) {
+                                thumbnail.data("yoxview", {
+                                    viewIndex: ++viewIndex
+                                });
+                                loadedViews.push($(thumbnail));
+                            });
                             else
                             {
-                                $.each(view.yoxthumbs("thumbnails"), function(i, thumbnail){
+                                $.each(view.yoxthumbs("thumbnails"),
+                                function(i, thumbnail) {
                                     var currentViewIndex = imageIndex + i;
                                     var thumbImg = thumbnail.children("img");
                                     if (thumbImg.length == 0)
-                                        thumbImg = thumbnail;
-                                        
-                		            viewImages[currentViewIndex].thumbnailImg = thumbImg;
-					                thumbnail.data("yoxview", {imageIndex: i, viewIndex: viewIndex });
-					            });
-				            }
+                                    thumbImg = thumbnail;
+
+                                    viewImages[currentViewIndex].thumbnailImg = thumbImg;
+                                    thumbnail.data("yoxview", {
+                                        imageIndex: i,
+                                        viewIndex: viewIndex
+                                    });
+                                });
+                            }
                             if (!$.yoxview.firstViewWithImages && data.images.length > 0)
                             {
                                 $.yoxview.firstViewWithImages = view;
-                                
+
                                 if (options.cacheImagesInBackground)
-                                    $.yoxview.startCache();
+                                $.yoxview.startCache();
                             }
                         });
                     }
                     else
-		            {
-			            viewData.images = viewImages;
+                    {
+                        viewData.images = viewImages;
                         createThumbnails(view, options);
-		            }
-                    
+                    }
+
                     loadedViews.push(view);
                     if (!$.yoxview.firstViewWithImages && viewData.images && viewData.images != 0)
                     {
                         $.yoxview.firstViewWithImages = view;
                         loadViewImages(view);
 
-                        if(options.cacheImagesInBackground && imagesCount != 0)
+                        if (options.cacheImagesInBackground && imagesCount != 0)
                         {
                             calculateCacheBuffer();
                             cacheImages(0);
@@ -334,10 +400,12 @@
             }
 
             // Init external files then proceed:
-            loadLanguage(options.lang, function(langData){
-                loadSkin(options, function(skin){
+            loadLanguage(options.lang,
+            function(langData) {
+                loadSkin(options,
+                function(skin) {
                     if (skin && skin.options)
-                        $.extend(options, skin.options);
+                    $.extend(options, skin.options);
 
                     Yox.loadDataSource(options, loadContents);
                 });
@@ -358,24 +426,24 @@
                         success: function(data)
                         {
                             if ($.yoxview.yoxviewSkins[skinName].css !== false)
-                                Yox.addStylesheet(top.document, skinUrl + ".css");
-   
+                            Yox.addStylesheet(top.document, skinUrl + ".css");
+
                             if (callback)
-                                callback($.yoxview.yoxviewSkins[skinName]);
+                            callback($.yoxview.yoxviewSkins[skinName]);
                         },
-                        error: function(){
+                        error: function() {
                             alert("Error loading skin file " + skinUrl + ".js");
                         }
                     });
                 }
                 else if (callback)
-                    callback($.yoxview.yoxviewSkins[skinName]);
+                callback($.yoxview.yoxviewSkins[skinName]);
             }
             else if (callback)
-                callback($.yoxview.yoxviewSkins[skinName]);
+            callback($.yoxview.yoxviewSkins[skinName]);
         }
-        
-         // Load the language file if not already loaded:
+
+        // Load the language file if not already loaded:
         function loadLanguage(langName, callback)
         {
             if (!yoxviewLanguages[langName])
@@ -383,23 +451,23 @@
                 yoxviewLanguages[langName] = {};
                 var langUrl = yoxviewPath + langName + ".js";
                 $.ajax({
-                    url : langUrl,
-                    async : false,
-                    dataType : "json",
-                    success: function(data){
+                    url: langUrl,
+                    async: false,
+                    dataType: "json",
+                    success: function(data) {
                         yoxviewLanguages[langName] = data;
                         if (callback)
-                            callback(data);
+                        callback(data);
                     },
-                    error: function(){
+                    error: function() {
                         alert("Error loading language file " + langUrl);
                     }
                 });
             }
             else if (callback)
-                callback(yoxviewLanguages[langName]);
+            callback(yoxviewLanguages[langName]);
         }
-                
+
         function resetPopup()
         {
             if (popup)
@@ -410,10 +478,10 @@
                 nextBtn = undefined;
                 image1 = undefined;
                 image2 = undefined;
-			    panel1 = undefined;
-			    panel2 = undefined;
+                panel1 = undefined;
+                panel2 = undefined;
                 currentItemIndex = 0;
-			    $.yoxview.infoButtons = {};
+                $.yoxview.infoButtons = {};
             }
             createPopup();
         }
@@ -424,12 +492,17 @@
             if (!images || currentViewIndex != viewData.viewIndex)
             {
                 if (!viewData.cacheVars)
-                    viewData.cacheVars = {cachedImagesCount: 0, cacheDirectionForward: true, cacheBufferLastIndex: null, currentCacheImg: 0 };
+                viewData.cacheVars = {
+                    cachedImagesCount: 0,
+                    cacheDirectionForward: true,
+                    cacheBufferLastIndex: null,
+                    currentCacheImg: 0
+                };
 
                 images = viewData.images;
                 imagesCount = images.length;
                 currentViewIndex = viewData.viewIndex;
- 
+
                 var isResetPopup = false;
                 var changeOptions = !currentOptionsSetIndex || (currentOptionsSetIndex != viewData.optionsSet);
 
@@ -441,28 +514,34 @@
                 }
 
                 if (options.onLoadImages)
-                    options.onLoadImages({ images: images, viewData: viewData });
-                 
+                options.onLoadImages({
+                    images: images,
+                    viewData: viewData
+                });
+
                 else if ((prevBtn && imagesCount == 1) || (popup && !prevBtn && imagesCount > 0))
-                    isResetPopup = true;
+                isResetPopup = true;
 
                 if (isResetPopup)
-                    resetPopup();
+                resetPopup();
 
                 cacheVars = viewData.cacheVars;
             }
         }
-        
+
         function getElementDimensions(type, originalDimensions, options)
         {
             var size = originalDimensions && (originalDimensions.width || originalDimensions.height)
-                ? { width: parseInt(originalDimensions.width), height: parseInt(originalDimensions.height) }
-                : options.defaultDimensions[type];
+            ? {
+                width: parseInt(originalDimensions.width),
+                height: parseInt(originalDimensions.height)
+            }
+            : options.defaultDimensions[type];
 
             if (isNaN(size.width))
-                size.width = null;
+            size.width = null;
             if (isNaN(size.height))
-                size.height = null;
+            size.height = null;
 
             return size;
         }
@@ -470,7 +549,7 @@
             image: function(thumbnail, thumbnailHref, thumbImg, options)
             {
                 var imageData = null;
-                for(var i=0; i<options.allowedImageUrls.length && !imageData; i++)
+                for (var i = 0; i < options.allowedImageUrls.length && !imageData; i++)
                 {
                     if (thumbnailHref.match(options.allowedImageUrls[i]))
                     {
@@ -487,36 +566,36 @@
             {
                 var imageData = null;
                 var matchFlash = thumbnailHref.match(Yox.Regex.flash);
-                var matchFlashVideo = matchFlash ? null : thumbnailHref.match(Yox.Regex.flashvideo);
-                
+                var matchFlashVideo = matchFlash ? null: thumbnailHref.match(Yox.Regex.flashvideo);
+
                 if (matchFlash || matchFlashVideo)
                 {
                     var urlData = Yox.getUrlData(thumbnailHref);
-				    var elementSize = getElementDimensions("flash", urlData.queryFields, options);
-    				
-				    if (urlData.queryFields)
-				    {
-					    delete urlData.queryFields.width;
-					    delete urlData.queryFields.height;
-				    }
-    				
+                    var elementSize = getElementDimensions("flash", urlData.queryFields, options);
+
+                    if (urlData.queryFields)
+                    {
+                        delete urlData.queryFields.width;
+                        delete urlData.queryFields.height;
+                    }
+
                     var flashPanel = $("<div>", {
                         className: "yoxview_element",
                         html: "<div class='yoxview_error'>Please install the latest version of the <a href='http://www.adobe.com/go/getflashplayer' target='_blank'>Flash player</a> to view content</div>"
                     });
-                    var flashData = matchFlashVideo 
-                        ? Yox.flashVideoPlayers[options.flashVideoPlayer](
-                            options.flashVideoPlayerPath, urlData.path,
-                            (urlData.queryFields && urlData.queryFields.image) ? urlData.queryFields.image : 
-                                thumbImg[0].nodeName == "IMG" ? thumbImg.attr("src") : null, 
-                            thumbImg.attr(options.titleAttribute))
-                        : urlData.queryFields || {};
-                    
+                    var flashData = matchFlashVideo
+                    ? Yox.flashVideoPlayers[options.flashVideoPlayer](
+                    options.flashVideoPlayerPath, urlData.path,
+                    (urlData.queryFields && urlData.queryFields.image) ? urlData.queryFields.image:
+                    thumbImg[0].nodeName == "IMG" ? thumbImg.attr("src") : null,
+                    thumbImg.attr(options.titleAttribute))
+                    : urlData.queryFields || {};
+
                     if (matchFlash)
-                        flashData.swf = urlData.path;
-                        
+                    flashData.swf = urlData.path;
+
                     $.extend(flashData, flashDefaults);
-                    
+
                     flashPanel.flash(flashData);
                     imageData = {
                         "element": flashPanel,
@@ -524,13 +603,13 @@
                     };
                     $.extend(imageData, elementSize);
                 }
-                
+
                 return imageData;
             },
             ooembed: function(thumbnail, thumbnailHref, thumbImg, options)
             {
                 var imageData = null;
-                for(videoProvider in Yox.Regex.video)
+                for (videoProvider in Yox.Regex.video)
                 {
                     if (thumbnailHref.match(Yox.Regex.video[videoProvider]))
                     {
@@ -546,8 +625,8 @@
             inline: function(thumbnail, thumbnailHref, thumbImg, options)
             {
                 if (!options.allowInternalLinks)
-                    return null;
-                    
+                return null;
+
                 var imageData = null;
                 var urlData = Yox.getUrlData(thumbnailHref);
                 if (urlData && urlData.anchor)
@@ -555,38 +634,41 @@
                     var element = $("#" + urlData.anchor);
                     if (element.length != 0)
                     {
-                        var elementSize = { width: parseInt(element.css("width")), height: parseInt(element.css("height")) };
+                        var elementSize = {
+                            width: parseInt(element.css("width")),
+                            height: parseInt(element.css("height"))
+                        };
 
                         element.css({
-		                    position: "absolute",
-		                    top: 0,
-		                    left: 0,
-		                    width: "100%",
-		                    height: "100%",
-		                    display: "block"
-		                });
-    		            
+                            position: "absolute",
+                            top: 0,
+                            left: 0,
+                            width: "100%",
+                            height: "100%",
+                            display: "block"
+                        });
+
                         imageData = {
                             type: "inlineElement",
                             "element": element,
                             title: element.attr("title")
                         };
-                        var padding = { 
+                        var padding = {
                             horizontal: parseInt(element.css("padding-right")) + parseInt(element.css("padding-left")),
                             vertical: parseInt(element.css("padding-top")) + parseInt(element.css("padding-bottom"))
                         };
-                        
-                        elementSize.width = isNaN(elementSize.width) ? null : elementSize.width + padding.horizontal;
-                        elementSize.height = isNaN(elementSize.height) ? null : elementSize.height + padding.vertical;
-                        
+
+                        elementSize.width = isNaN(elementSize.width) ? null: elementSize.width + padding.horizontal;
+                        elementSize.height = isNaN(elementSize.height) ? null: elementSize.height + padding.vertical;
+
                         $.extend(imageData, elementSize);
                         if (padding.horizontal != 0 || padding.vertical != 0)
-                            imageData.padding = padding;
-                            
+                        imageData.padding = padding;
+
                         element.remove();
                     }
                 }
-                
+
                 return imageData;
             },
             iframe: function(thumbnail, thumbnailHref, thumbImg, options)
@@ -599,10 +681,10 @@
                     if (urlData && urlData.path)
                     {
                         var iframeSize = getElementDimensions("iframe", urlData.queryFields, options);
-					    if (urlData.queryFields)
-					    {
-						    delete urlData.queryFields.width;
-						    delete urlData.queryFields.height;
+                        if (urlData.queryFields)
+                        {
+                            delete urlData.queryFields.width;
+                            delete urlData.queryFields.height;
                         }
                         imageData = {
                             "element": $("<iframe>", {
@@ -615,7 +697,7 @@
                         $.extend(imageData, iframeSize);
                     }
                 }
-                
+
                 return imageData;
             }
         };
@@ -626,7 +708,7 @@
             var thumbImg = thumbnail.children("img:first");
 
             if (thumbImg.length == 0)
-                thumbImg = thumbnail;
+            thumbImg = thumbnail;
 
             var imageData = {};
             for (supportedType in supportedTypes)
@@ -643,9 +725,9 @@
                     break;
                 }
             }
-            
+
             if (!imageData.media)
-                return null;
+            return null;
 
             imageData.thumbnailImg = thumbImg;
             return imageData;
@@ -653,83 +735,85 @@
 
         function createThumbnails(view, options, additionalImages, onClick)
         {
-            var clickHandler = function(e){
+            var clickHandler = function(e) {
                 var data = $(e.currentTarget).data("yoxview");
                 if (!data || data.imageIndex === null)
-                    return true;
+                return true;
                 else
                 {
                     e.preventDefault();
                     $.yoxview.open($(e.liveFired || e.currentTarget).data("yoxview").viewIndex, data.imageIndex);
                 }
             };
-            
-            if (view[0].tagName == "A")
-                view.bind("click.yoxview", clickHandler);
-            else if (!additionalImages)
-                view.delegate(getAllowedThumbnailsSelector(options), "click.yoxview", clickHandler);
-            else
-                view.yoxthumbs($.extend({ 
-                    images: additionalImages,
-                    enableOnlyMedia: false,
-                    onClick: onClick || function(e){
-                        e.preventDefault();
-				        if (options.thumbnailsOptions && options.thumbnailsOptions.onClick)
-                            options.thumbnailsOptions.onClick(
-                                $(e.currentTarget).data("yoxview").imageIndex, 
-                                $(e.currentTarget),
-                                $(e.liveFired).data("yoxview").viewIndex);
-                        else
-                            $.yoxview.open($(e.liveFired || e.currentTarget).data("yoxview").viewIndex,
-                                $(e.currentTarget).data("yoxview").imageIndex);
 
-                        return false;
-                    }
-                }, options.thumbnailsOptions));
+            if (view[0].tagName == "A")
+            view.bind("click.yoxview", clickHandler);
+            else if (!additionalImages)
+            view.delegate(getAllowedThumbnailsSelector(options), "click.yoxview", clickHandler);
+            else
+            view.yoxthumbs($.extend({
+                images: additionalImages,
+                enableOnlyMedia: false,
+                onClick: onClick ||
+                function(e) {
+                    e.preventDefault();
+                    if (options.thumbnailsOptions && options.thumbnailsOptions.onClick)
+                    options.thumbnailsOptions.onClick(
+                    $(e.currentTarget).data("yoxview").imageIndex,
+                    $(e.currentTarget),
+                    $(e.liveFired).data("yoxview").viewIndex);
+                    else
+                    $.yoxview.open($(e.liveFired || e.currentTarget).data("yoxview").viewIndex,
+                    $(e.currentTarget).data("yoxview").imageIndex);
+
+                    return false;
+                }
+            },
+            options.thumbnailsOptions));
         }
         function setThumbnail(setToPopupImage)
         {
             var currentView = loadedViews[currentViewIndex];
             thumbnail = currentView[0].tagName == "A"
-                ? currentView
-                : images[currentItemIndex].thumbnailImg;
+            ? currentView
+            : images[currentItemIndex].thumbnailImg;
 
             if (!thumbnail || thumbnail.length == 0)
-                thumbnail = images[0].thumbnailImg;
+            thumbnail = images[0].thumbnailImg;
 
             if (thumbnail)
             {
                 var thumbnailSrc = thumbnail.attr("src");
 
                 if (setToPopupImage && image1 && thumbnailSrc)
-                    image1.attr("src", thumbnailSrc);
+                image1.attr("src", thumbnailSrc);
 
                 if (currentViewIsInFrame && !frameOffset && window.name)
-                    frameOffset = $(top.document).find("[name='" + window.name + "']").offset();
+                frameOffset = $(top.document).find("[name='" + window.name + "']").offset();
 
                 thumbnailPos = thumbnail.offset();
                 thumbnailProperties = {
-                    width: thumbnail.width(), 
-                    height: thumbnail.height(), 
-                    top: Math.round(thumbnailPos.top - popupWindow.scrollTop() + (frameOffset ? frameOffset.top : 0)), 
-                    left: Math.round(thumbnailPos.left  + (frameOffset ? frameOffset.left : 0))
+                    width: thumbnail.width(),
+                    height: thumbnail.height(),
+                    top: Math.round(thumbnailPos.top - popupWindow.scrollTop() + (frameOffset ? frameOffset.top: 0)),
+                    left: Math.round(thumbnailPos.left + (frameOffset ? frameOffset.left: 0))
                 };
             }
         }
-        
-    //    Opens the viewer popup.
-    //    Arguments:
-    //    viewIndex: The 0-based index of the view to open, in case there are multiple instances of YoxView on the same page. Default is 0.
-    //    imageIndex: The 0-based index of the image to open, in the specified view. Default is 0.
-    //    callback: A function to call after the gallery has opened.
+
+        //    Opens the viewer popup.
+        //    Arguments:
+        //    viewIndex: The 0-based index of the view to open, in case there are multiple instances of YoxView on the same page. Default is 0.
+        //    imageIndex: The 0-based index of the image to open, in the specified view. Default is 0.
+        //    callback: A function to call after the gallery has opened.
         this.open = function(viewIndex, initialItemIndex, callback)
         {
             var isJquery = this instanceof jQuery;
             if (isJquery)
             {
                 if (viewIndex && typeof(viewIndex) == 'function')
-                    callback = viewIndex;
-                    
+                callback = viewIndex;
+
                 var itemData = this.data("yoxview");
                 viewIndex = itemData.viewIndex;
                 initialItemIndex = itemData.imageIndex;
@@ -748,20 +832,29 @@
             initialItemIndex = initialItemIndex || 0;
 
             $(document).bind('keydown.yoxview', catchPress);
-            
+
             loadViewImages(loadedViews[viewIndex]);
             if (!popup && imagesCount != 0)
-                createPopup();
+            createPopup();
 
             $.yoxview.selectImage(initialItemIndex);
-            popupWrap.stop().css({ opacity: 0, display: "block" }).animate({ opacity: 1}, "slow", function(){ popupWrap.css("opacity", "") });
-            if(options.cacheImagesInBackground)
-                cacheImages(initialItemIndex);
-                
-            if (callback)
-                onOpenCallback = callback;
+            popupWrap.stop().css({
+                opacity: 0,
+                display: "block"
+            }).animate({
+                opacity: 1
+            },
+            "slow",
+            function() {
+                popupWrap.css("opacity", "")
+            });
+            if (options.cacheImagesInBackground)
+            cacheImages(initialItemIndex);
 
-            return isJquery ? this : false;
+            if (callback)
+            onOpenCallback = callback;
+
+            return isJquery ? this: false;
         }
 
         this.selectImage = function(itemIndex)
@@ -773,15 +866,15 @@
             thumbnail.blur();
 
             panel1.css({
-                "z-index" : "1",
-                width : "100%", 
-                height : "100%"             
+                "z-index": "1",
+                width: "100%",
+                height: "100%"
             });
             panel2.css({
-                "display" : "none",
-                "z-index" : "2"
+                "display": "none",
+                "z-index": "2"
             });
-            
+
             firstImage = true;
             popup.css(thumbnailProperties);
             this.select(itemIndex);
@@ -791,20 +884,20 @@
             resumePlay = isPlaying;
 
             if (isPlaying)
-                stopPlay();
+            stopPlay();
 
             setImage(currentItemIndex);
-            
+
             if (resumePlay)
-                startPlay();
+            startPlay();
         };
-        
-        //var optionsRequiringUpdate = 
-        this.options = function(opt, value){
+
+        //var optionsRequiringUpdate =
+        this.options = function(opt, value) {
             if (!opt)
-                return this;
-                
-            if (value && typeof(opt) === "string"){
+            return this;
+
+            if (value && typeof(opt) === "string") {
                 var pName = opt;
                 opt = {};
                 opt[pName] = value;
@@ -821,19 +914,20 @@
             }
             else
             {
-                $.each(optionsSets, function(i, optionsSet){
+                $.each(optionsSets,
+                function(i, optionsSet) {
                     $.extend(optionsSet, opt);
                 });
                 $.yoxview.update();
             }
         };
 
-    //    Displays the specified image and shows the (optionally) specified button. Use when the viewer is open.
-    //    Arguments:
-    //    imageIndex: The 0-based index of the image to display.
-    //    pressedBtn: a jQuery element of a button to display momentarily in the viewer. 
-    //                For example, if the image has been selected by pressing the Next button 
-    //                on the keyboard, specify the Next button. If no button should be display, leave blank.
+        //    Displays the specified image and shows the (optionally) specified button. Use when the viewer is open.
+        //    Arguments:
+        //    imageIndex: The 0-based index of the image to display.
+        //    pressedBtn: a jQuery element of a button to display momentarily in the viewer.
+        //                For example, if the image has been selected by pressing the Next button
+        //                on the keyboard, specify the Next button. If no button should be display, leave blank.
         this.select = function(itemIndex, pressedBtn, viewIndex)
         {
             if (typeof pressedBtn === "number")
@@ -864,18 +958,18 @@
                     }
                 }
                 if (!isPlaying && pressedBtn)
-                    flicker(pressedBtn);
-                    
+                flicker(pressedBtn);
+
                 $.yoxview.currentImage = images[itemIndex];
                 currentItemIndex = itemIndex;
                 setImage(currentItemIndex);
-                
+
                 // Set the cache buffer, if required:
                 calculateCacheBuffer();
-            
+
                 // Handle event onSelect:
                 if (options.onSelect)
-                    options.onSelect(itemIndex, images[itemIndex]);
+                options.onSelect(itemIndex, images[itemIndex]);
             }
         }
         this.prev = function(continuePlaying)
@@ -883,110 +977,125 @@
             cacheVars.cacheDirectionForward = false;
             this.select(currentItemIndex - 1, prevBtn);
             if (isPlaying && continuePlaying !== true)
-                stopPlay();
+            stopPlay();
         }
         this.next = function(continuePlaying)
         {
             cacheVars.cacheDirectionForward = true;
             this.select(currentItemIndex + 1, nextBtn);
             if (isPlaying && continuePlaying !== true)
-                stopPlay();
+            stopPlay();
         }
         this.first = function()
         {
             if (!options.disableNotifications)
-                longFlicker("first");
-                
+            longFlicker("first");
+
             this.select(0);
             if (isPlaying)
-                stopPlay();
+            stopPlay();
         };
         this.last = function()
         {
             if (!options.disableNotifications)
-                longFlicker("last");
-                
+            longFlicker("last");
+
             this.select(imagesCount - 1);
             if (isPlaying)
-                stopPlay();
+            stopPlay();
         };
-        this.setDefaults = function(options){
+        this.setDefaults = function(options) {
             $.extend(true, defaults, options);
         };
         this.play = function()
         {
             if (!this.isOpen || imagesCount == 1)
-                return;
-                
+            return;
+
             cacheVars.cacheDirectionForward = true;
-            
+
             if (!isPlaying)
             {
                 if (!options.disableNotifications)
-                    longFlicker("play");
-                    
+                longFlicker("play");
+
                 startPlay();
             }
             else
             {
                 if (!options.disableNotifications)
-                    longFlicker("pause");
-                    
+                longFlicker("pause");
+
                 stopPlay();
             }
         };
         function flicker(button)
         {
             if (button.css("opacity") == 0)
-                button.stop().animate({ opacity : 0 }, options.buttonsFadeTime, fadeOut(button));
+            button.stop().animate({
+                opacity: 0
+            },
+            options.buttonsFadeTime, fadeOut(button));
         }
         function longFlicker(notificationName)
         {
             notification.css("background-position", sprites.getBackgroundPosition("notifications", notificationName));
-            notification.stop().fadeIn(options.buttonsFadeTime, function(){ 
+            notification.stop().fadeIn(options.buttonsFadeTime,
+            function() {
                 $(this).delay(500)
                 .fadeOut(options.buttonsFadeTime);
             });
         }
         function fadeIn(button)
         {
-            $(button).stop().animate({ opacity : 0 }, options.buttonsFadeTime);
+            $(button).stop().animate({
+                opacity: 0
+            },
+            options.buttonsFadeTime);
         }
         function fadeOut(button)
         {
-            $(button).stop().animate({ opacity : 0.5 }, options.buttonsFadeTime);
+            $(button).stop().animate({
+                opacity: 0.5
+            },
+            options.buttonsFadeTime);
         }
 
         this.close = function()
         {
             if (!this.isOpen)
-                return;
-                
+            return;
+
             this.closeHelp();
             setThumbnail(false);
-            resizePopup(thumbnailProperties, function(){ $.yoxview.isOpen = false; });
+            resizePopup(thumbnailProperties,
+            function() {
+                $.yoxview.isOpen = false;
+            });
             hideMenuPanel();
-            
+
             if (infoPanel)
-                hideInfoPanel(function(){
-                    infoText.html("");
-                });
+            hideInfoPanel(function() {
+                infoText.html("");
+            });
 
             newPanel.animate({
                 width: thumbnailProperties.width,
                 height: thumbnailProperties.height
-            }, options.popupResizeTime, function(){
+            },
+            options.popupResizeTime,
+            function() {
                 newPanel.css("opacity", 1);
             });
-    		
-		    popupWrap.stop().fadeOut(1000);
-    		 
-		    if (isPlaying)
-			    stopPlay();
-    			
-		    swipePanels();
+
+            popupWrap.stop().fadeOut(1000);
+
+            if (isPlaying)
+            stopPlay();
+
+            swipePanels();
             if (options.onClose)
-                options.onClose();
+            options.onClose();
 
             $(document).unbind("keydown.yoxview");
             isResizing = false;
@@ -995,28 +1104,35 @@
         {
             if (!this.isOpen)
             return;
-            
+
             if (helpPanel.css("display") == "none")
-                helpPanel.css("display", "block").stop().animate({ opacity : 0.8 }, options.buttonsFadeTime);
+            helpPanel.css("display", "block").stop().animate({
+                opacity: 0.8
+            },
+            options.buttonsFadeTime);
             else
-                this.closeHelp();
+            this.closeHelp();
         }
         this.closeHelp = function()
         {
             if (helpPanel.css("display") != "none")
-            helpPanel.stop().animate({ opacity: 0 }, options.buttonsFadeTime, function(){
-                    helpPanel.css("display", "none");
-                });
+            helpPanel.stop().animate({
+                opacity: 0
+            },
+            options.buttonsFadeTime,
+            function() {
+                helpPanel.css("display", "none");
+            });
         }
         this.clickBtn = function(fn, stopPlaying)
         {
             if (stopPlaying && isPlaying)
-                stopPlay();
-                
+            stopPlay();
+
             fn.call(this);
             return false;
         }
-        
+
         function catchPress(e)
         {
             if ($.yoxview && $.yoxview.isOpen)
@@ -1033,14 +1149,14 @@
             }
             return true;
         }
-        
+
         function createMenuButton(_title, btnFunction, stopPlay)
         {
             var btn = $("<a>", {
-                href : "#",
-                click : function(){
+                href: "#",
+                click: function() {
                     return $.yoxview.clickBtn($.yoxview[btnFunction], stopPlay);
-                }         
+                }
             });
             var btnSpan = $("<span>" + _title + "</span>");
             btnSpan.css("opacity", "0")
@@ -1052,57 +1168,64 @@
 
         // Prev and next buttons:
         function createNavButton(_function, _side, singleImage)
-        {      
+        {
             var navBtnImg = new Image();
             navBtnImg.src = options.imagesFolder + _side + ".png";
             var navBtn = $("<a>", {
-                css : {
-                    "background" : "url(" + navBtnImg.src + ") no-repeat " + _side + " center",
-                    "opacity" : "0",
-                    "outline" : "0"
+                css: {
+                    "background": "url(" + navBtnImg.src + ") no-repeat " + _side + " center",
+                    "opacity": "0",
+                    "outline": "0"
                 },
-                className : "yoxview_ctlBtn",
-                href : "#"
+                className: "yoxview_ctlBtn",
+                href: "#"
             });
-            
+
             navBtn.css(_side, "0");
             if (!singleImage)
             {
-                navBtn.click(function(){
+                navBtn.click(function() {
                     this.blur();
                     return $.yoxview.clickBtn(_function, true);
                 });
-                
+
                 if (options.buttonsFadeTime != 0)
                 {
                     navBtn.hover(
-                        function(){
-                            if ($.yoxview.isOpen)
-                                $(this).stop().animate({ opacity : 0.6 }, options.buttonsFadeTime);
+                    function() {
+                        if ($.yoxview.isOpen)
+                        $(this).stop().animate({
+                            opacity: 0.6
                         },
-                        function(){
-                            $(this).stop().animate({ opacity : 0 }, options.buttonsFadeTime);
-                        }
+                        options.buttonsFadeTime);
+                    },
+                    function() {
+                        $(this).stop().animate({
+                            opacity: 0
+                        },
+                        options.buttonsFadeTime);
+                    }
                     );
                 }
             }
             else
-                navBtn.css("cursor", "default");
-                
+            navBtn.css("cursor", "default");
+
             return navBtn;
         }
 
-        popupWindow.bind("resize.yoxview", function(){
+        popupWindow.bind("resize.yoxview",
+        function() {
             windowDimensions = getWindowDimensions();
             if ($.yoxview.isOpen)
-                $.yoxview.resize();
+            $.yoxview.resize();
         });
-        
+
         function calculateMargins()
         {
             var margins = typeof(options.popupMargin) == "number" ? [String(options.popupMargin)] : options.popupMargin.split(" ", 4);
             popupMargins.top = parseInt(margins[0]);
-            switch(margins.length){
+            switch (margins.length) {
             case 1:
                 popupMargins.bottom = popupMargins.right = popupMargins.left = popupMargins.top;
                 break;
@@ -1120,26 +1243,26 @@
                     bottom: parseInt(margins[2]),
                     left: parseInt(margins[3])
                 });
-                
+
                 break;
             }
             popupMargins.totalHeight = popupMargins.top + popupMargins.bottom;
             popupMargins.totalWidth = popupMargins.left + popupMargins.right;
-            
+
             if (options.renderInfoExternally)
-                $.extend(defaultPopupMargins, popupMargins);
+            $.extend(defaultPopupMargins, popupMargins);
         }
 
         function createPopup()
         {
             calculateMargins();
             windowDimensions = getWindowDimensions();
-            
+
             sprites = new Yox.Sprites({
                 notifications: {
                     width: 59,
                     height: 59,
-                    sprites: [ 'empty', 'playRTL', 'play', 'pause', 'last', 'first' ]
+                    sprites: ['empty', 'playRTL', 'play', 'pause', 'last', 'first']
                 },
                 icons: {
                     width: 18,
@@ -1150,13 +1273,14 @@
                     height: 42,
                     sprites: ['back']
                 }
-            }, options.imagesFolder + "sprites.png", options.imagesFolder + "empty.gif");
-            
-            keyMappings ={
-                RIGHT: options.isRTL ? 'prev' : 'next',
+            },
+            options.imagesFolder + "sprites.png", options.imagesFolder + "empty.gif");
+
+            keyMappings = {
+                RIGHT: options.isRTL ? 'prev': 'next',
                 DOWN: 'next',
                 UP: 'prev',
-                LEFT: options.isRTL ? 'next' : 'prev',
+                LEFT: options.isRTL ? 'next': 'prev',
                 ENTER: 'play',
                 HOME: 'first',
                 END: 'last',
@@ -1164,110 +1288,119 @@
                 h: 'help',
                 ESCAPE: 'close'
             };
-            
+
             currentLanguage = yoxviewLanguages[options.lang];
             var skin = options.skin ? $.yoxview.yoxviewSkins[options.skin] : null;
-            
+
             popup = $("<div>", {
                 id: 'yoxview',
-                click: function(e){ e.stopPropagation(); }
+                click: function(e) {
+                    e.stopPropagation();
+                }
             });
-                
+
             popupWrap = $("<div>", {
                 id: "yoxview_popupWrap",
-                click: function(e){ e.preventDefault(); $.yoxview.clickBtn($.yoxview.close, true); }
+                click: function(e) {
+                    e.preventDefault();
+                    $.yoxview.clickBtn($.yoxview.close, true);
+                }
             });
-            
+
             if (options.skin)
-                popupWrap.attr("className", "yoxview_" + options.skin);
-                
+            popupWrap.attr("className", "yoxview_" + options.skin);
+
             if (options.backgroundOpacity === 0)
-                popupWrap.css("background", "none")
+            popupWrap.css("background", "none")
             else if (Yox.Support.rgba())
-                popupWrap.css("background-color", Yox.hex2rgba(options.backgroundColor, options.backgroundOpacity));
+            popupWrap.css("background-color", Yox.hex2rgba(options.backgroundColor, options.backgroundOpacity));
 
             popupWrap.appendTo($(top.document.getElementsByTagName("body")[0])).append(popup);
-            
-		    panel1 = $("<div>", {
-			    className: "yoxview_imgPanel",
-			    css: {
-				    "z-index": "2"
-			    }
-		    });
-		    panel2 = $("<div>", {
-			    className: "yoxview_imgPanel",
-			    css: {
-				    "z-index": "1",
-				    "display": "none"
-			    }
-		    });
-            
+
+            panel1 = $("<div>", {
+                className: "yoxview_imgPanel",
+                css: {
+                    "z-index": "2"
+                }
+            });
+            panel2 = $("<div>", {
+                className: "yoxview_imgPanel",
+                css: {
+                    "z-index": "1",
+                    "display": "none"
+                }
+            });
+
             // the first image:
             image1 = $("<img />", {
-                className : "yoxview_fadeImg",
-                css : {
-				    "display" : "block",
-				    "width" : "100%",
-				    "height" : "100%"
-			    }
+                className: "yoxview_fadeImg",
+                css: {
+                    "display": "block",
+                    "width": "100%",
+                    "height": "100%"
+                }
             });
 
             // the second image:
             image2 = $("<img />", {
-                className : "yoxview_fadeImg",
-                css : {
-				    "display" : "block",
-				    "width" : "100%",
-				    "height" : "100%"
-			    }
+                className: "yoxview_fadeImg",
+                css: {
+                    "display": "block",
+                    "width": "100%",
+                    "height": "100%"
+                }
             });
-            panel1.data("yoxviewPanel", {image: image1})
-		    .append(image1).appendTo(popup);
-		    panel2.data("yoxviewPanel", {image: image2})
-		    panel2.append(image2).appendTo(popup);
+            panel1.data("yoxviewPanel", {
+                image: image1
+            })
+            .append(image1).appendTo(popup);
+            panel2.data("yoxviewPanel", {
+                image: image2
+            })
+            panel2.append(image2).appendTo(popup);
             var singleImage = imagesCount == 1;
             if (singleImage && !images[0].media.title)
-                options.renderInfo = false;
-                
+            options.renderInfo = false;
+
             // the menu:
             if (options.renderMenu !== false)
             {
                 var menuPanelWrap = $("<div>", {
-                    className : "yoxview_popupBarPanel yoxview_top"
+                    className: "yoxview_popupBarPanel yoxview_top"
                 });
 
                 if (options.autoHideMenu !== false)
                 {
                     menuPanelWrap.hover(
-                        function(){
-                            if ($.yoxview.isOpen)
-                                showMenuPanel();
-                        },
-                        function(){
-                            if ($.yoxview.isOpen)
-                                hideMenuPanel();
-                        }
+                    function() {
+                        if ($.yoxview.isOpen)
+                        showMenuPanel();
+                    },
+                    function() {
+                        if ($.yoxview.isOpen)
+                        hideMenuPanel();
+                    }
                     );
                 }
-                
+
                 menuPanel = $("<div>", {
-                    id : "yoxview_menuPanel"
+                    id: "yoxview_menuPanel"
                 });
-                
+
                 if (Yox.Support.rgba() && options.menuBackgroundColor)
-                    menuPanel.css("background", Yox.hex2rgba(options.menuBackgroundColor, options.menuBackgroundOpacity || 0.8));
+                menuPanel.css("background", Yox.hex2rgba(options.menuBackgroundColor, options.menuBackgroundOpacity || 0.8));
 
                 var helpBtn = createMenuButton(currentLanguage.Help, "help", false);
 
                 $.yoxview.infoButtons.playBtn = createMenuButton(currentLanguage.Slideshow, "play", false);
                 playBtnText = $.yoxview.infoButtons.playBtn.children("span");
-                
+
                 menuPanel.append(
-                    createMenuButton(currentLanguage.Close, "close", true),
-                    helpBtn,
-                    $.yoxview.infoButtons.playBtn
+                createMenuButton(currentLanguage.Close, "close", true),
+                helpBtn,
+                $.yoxview.infoButtons.playBtn
                 );
-                
+
                 if (singleImage)
                 {
                     $.yoxview.infoButtons.playBtn.css("display", "none");
@@ -1276,41 +1409,55 @@
                         width: 58
                     });
                 }
-                
+
                 menuPanel.find("a:last-child").attr("class", "last");
                 menuPanelWrap.append(menuPanel).appendTo(popup);
-                menuPanel.delegate("a", "mouseenter", function(){
-                    $(this).stop().animate({ top : "8px" }, "fast").find("span").stop().animate({opacity:1}, "fast");
+                menuPanel.delegate("a", "mouseenter",
+                function() {
+                    $(this).stop().animate({
+                        top: "8px"
+                    },
+                    "fast").find("span").stop().animate({
+                        opacity: 1
+                    },
+                    "fast");
                 })
-                .delegate("a", "mouseleave", function(){
-                    $(this).stop().animate({ top : "0" }, "fast").find("span").stop().animate({opacity:0}, "fast");
+                .delegate("a", "mouseleave",
+                function() {
+                    $(this).stop().animate({
+                        top: "0"
+                    },
+                    "fast").find("span").stop().animate({
+                        opacity: 0
+                    },
+                    "fast");
                 });
             }
 
             if (options.renderButtons !== false && (!singleImage || !$.support.opacity))
             {
-                // prev and next buttons:            
-                prevBtn = createNavButton($.yoxview.prev, options.isRTL ? "right" : "left", singleImage);            
-                nextBtn = createNavButton($.yoxview.next, options.isRTL ? "left" : "right", singleImage);
+                // prev and next buttons:
+                prevBtn = createNavButton($.yoxview.prev, options.isRTL ? "right": "left", singleImage);
+                nextBtn = createNavButton($.yoxview.next, options.isRTL ? "left": "right", singleImage);
 
                 popup.append(prevBtn, nextBtn);
-                
+
                 if (singleImage && !$.support.opacity)
                 {
                     ctlButtons = $();
-                    
+
                 }
                 else
-                    ctlButtons = popup.find(".yoxview_ctlBtn");
+                ctlButtons = popup.find(".yoxview_ctlBtn");
             }
             else
-                ctlButtons = $();        
+            ctlButtons = $();
 
             // add the ajax loader:
             ajaxLoader = $("<div>", {
                 id: "yoxview_ajaxLoader",
                 className: "yoxview_notification",
-                css: { 
+                css: {
                     "display": "none"
                 }
             });
@@ -1325,7 +1472,7 @@
                 }
             }))
             .appendTo(popup);
-            
+
             // notification image
             if (!options.disableNotifications)
             {
@@ -1334,18 +1481,18 @@
                 });
                 popup.append(notification);
             }
-            
+
             // help:
             helpPanel = $("<div>", {
-                id : "yoxview_helpPanel", 
-                href : "#", 
-                title : currentLanguage.CloseHelp,
-                css : {
-                    "background" : "url(" + options.imagesFolder + "help_panel.png) no-repeat center top",
-                    "direction" : currentLanguage.Direction,
-                    "opacity" : "0"
+                id: "yoxview_helpPanel",
+                href: "#",
+                title: currentLanguage.CloseHelp,
+                css: {
+                    "background": "url(" + options.imagesFolder + "help_panel.png) no-repeat center top",
+                    "direction": currentLanguage.Direction,
+                    "opacity": "0"
                 },
-                click : function(){
+                click: function() {
                     return $.yoxview.clickBtn($.yoxview.help, false);
                 }
             });
@@ -1355,19 +1502,21 @@
 
             var helpText = document.createElement("p");
             helpText.innerHTML = currentLanguage.HelpText;
-            
+
             var closeHelp = document.createElement("span");
             closeHelp.id = "yoxview_closeHelp";
             closeHelp.innerHTML = currentLanguage.CloseHelp;
-            
+
             helpPanel.append(helpTitle).append(helpText).append(closeHelp).appendTo(popup);
-            
+
             // popup info:
             if (options.renderInfo !== false)
             {
                 infoPanel = $("<div>", {
                     id: "yoxview_infoPanel",
-                    click: function(e){ e.stopPropagation(); }
+                    click: function(e) {
+                        e.stopPropagation();
+                    }
                 });
 
                 if (options.infoBackOpacity === 0)
@@ -1385,13 +1534,13 @@
                     else
                     {
                         infoPanel.append(
-                            $("<div>", {
-                                id : "yoxview_infoPanelBack",
-                                css : {
-                                    "background" : options.infoBackColor,
-                                    "opacity" : options.infoBackOpacity
-                                }
-                            })
+                        $("<div>", {
+                            id: "yoxview_infoPanelBack",
+                            css: {
+                                "background": options.infoBackColor,
+                                "opacity": options.infoBackOpacity
+                            }
+                        })
                         );
                         infoPanelContent = $("<div>", {
                             id: "yoxview_infoPanelContent"
@@ -1401,53 +1550,55 @@
                 countDisplay = $("<span>", {
                     id: "yoxview_count"
                 });
-                
+
                 infoText = $("<div>", {
                     id: "yoxview_infoText"
                 });
-                
+
                 if (singleImage)
                 {
                     infoText.css("margin-left", "10px");
                     countDisplay.css("display", "none");
                 }
                 infoPanelContent.append(countDisplay);
-                
+
                 if (options.renderInfoPin !== false)
                 {
-                    infoPinLinkImg = sprites.getSprite("icons", options.autoHideInfo ? "pin" : "unpin");
+                    infoPinLinkImg = sprites.getSprite("icons", options.autoHideInfo ? "pin": "unpin");
                     infoPinLink = $("<a>", {
                         className: "yoxviewInfoLink",
                         href: "#",
-                        title: options.autoHideInfo ? currentLanguage.PinInfo : currentLanguage.UnpinInfo,
-                        css: { display: 'inline' },
-                        click: function(e){
+                        title: options.autoHideInfo ? currentLanguage.PinInfo: currentLanguage.UnpinInfo,
+                        css: {
+                            display: 'inline'
+                        },
+                        click: function(e) {
                             e.preventDefault();
                             options.autoHideInfo = !options.autoHideInfo;
-                            infoPinLinkImg.css("background-position", sprites.getBackgroundPosition("icons", options.autoHideInfo ? "pin" : "unpin"));
-                            this.title = options.autoHideInfo ? currentLanguage.PinInfo : currentLanguage.UnpinInfo;
+                            infoPinLinkImg.css("background-position", sprites.getBackgroundPosition("icons", options.autoHideInfo ? "pin": "unpin"));
+                            this.title = options.autoHideInfo ? currentLanguage.PinInfo: currentLanguage.UnpinInfo;
                         }
                     });
                     infoPinLink.append(infoPinLinkImg).appendTo(infoPanelContent);
-                }   
+                }
 
                 if (skin && skin.infoButtons)
                 {
                     var skinButtons = skin.infoButtons(options, currentLanguage, sprites, popupWrap, popup);
                     if (options.infoButtons)
-			            $.extend(options.infoButtons, skinButtons);
-			        else
-			            options.infoButtons = skinButtons;
-			    }
-			    if (options.infoButtons)
-			    {  
-				    $.extend($.yoxview.infoButtons, options.infoButtons);
-				    for (infoButton in options.infoButtons)
-				    {
-					    options.infoButtons[infoButton].attr("className", "yoxviewInfoLink").css("display", "block").appendTo(infoPanelContent);
-				    }
-			    }
-                
+                    $.extend(options.infoButtons, skinButtons);
+                    else
+                    options.infoButtons = skinButtons;
+                }
+                if (options.infoButtons)
+                {
+                    $.extend($.yoxview.infoButtons, options.infoButtons);
+                    for (infoButton in options.infoButtons)
+                    {
+                        options.infoButtons[infoButton].attr("className", "yoxviewInfoLink").css("display", "block").appendTo(infoPanelContent);
+                    }
+                }
+
                 if (options.linkToOriginalContext !== false)
                 {
                     infoPanelLink = $("<a>", {
@@ -1457,53 +1608,52 @@
                     });
                     infoPanelLink.append(sprites.getSprite("icons", "link")).appendTo(infoPanelContent);
                 }
-                
+
                 infoPanelContent.append(infoText);
                 if (!Yox.Support.rgba())
-                    infoPanel.append(infoPanelContent);
-                    
-                infoPanel.appendTo(options.renderInfoExternally ? popupWrap : popup);
-                
+                infoPanel.append(infoPanelContent);
+
+                infoPanel.appendTo(options.renderInfoExternally ? popupWrap: popup);
+
                 if (!options.renderInfoExternally)
                 {
                     infoPanelWrap = $("<div>", {
-                        className : "yoxview_popupBarPanel yoxview_bottom"
+                        className: "yoxview_popupBarPanel yoxview_bottom"
                     });
-                    
+
                     infoPanelWrap.hover(
-                        function(){
-                            if ($.yoxview.isOpen && !disableInfo && options.autoHideInfo !== false)
-                                setInfoPanelHeight();
-                        },
-                        function(){
-                            if ($.yoxview.isOpen && !disableInfo && options.autoHideInfo !== false)
-                                hideInfoPanel();
-                        }
+                    function() {
+                        if ($.yoxview.isOpen && !disableInfo && options.autoHideInfo !== false)
+                        setInfoPanelHeight();
+                    },
+                    function() {
+                        if ($.yoxview.isOpen && !disableInfo && options.autoHideInfo !== false)
+                        hideInfoPanel();
+                    }
                     );
                     infoPanel.wrap(infoPanelWrap);
                     infoPanelWrap = infoPanel.parent();
                 }
-            }        
+            }
             // set the background if no RGBA support found:
             if (!Yox.Support.rgba())
             {
                 popupBackground = $("<div>", {
-                    css : {
-                        "position" : "fixed",
-                        "height" : "100%",
-                        "width" : "100%",
-                        "top" : "0",
-                        "left" : "0",
-                        "background" : options.backgroundColor,
-                        "z-index" : "1",
-                        "opacity" : options.backgroundOpacity
+                    css: {
+                        "position": "fixed",
+                        "height": "100%",
+                        "width": "100%",
+                        "top": "0",
+                        "left": "0",
+                        "background": options.backgroundColor,
+                        "z-index": "1",
+                        "opacity": options.backgroundOpacity
                     }
                 }).appendTo(popupWrap);
             }
         }
-        
-	    // Cache stuff:
-    	
+
+        // Cache stuff:
         $(cacheImg).load(function()
         {
             $.extend(images[cacheVars.currentCacheImg].media, {
@@ -1513,18 +1663,18 @@
             });
             advanceCache();
         })
-        .error(function(){
+        .error(function() {
             advanceCache();
-	    });
-    	
-	    function advanceCache()
-	    {
-	        cacheVars.cachedImagesCount++;
+        });
+
+        function advanceCache()
+        {
+            cacheVars.cachedImagesCount++;
             if (cacheVars.cachedImagesCount == imagesCount)
-                cacheVars.cacheComplete = true;
+            cacheVars.cacheComplete = true;
             else
-                getCacheBuffer();
-	    }
+            getCacheBuffer();
+        }
         this.startCache = function()
         {
             loadViewImages(this.firstViewWithImages);
@@ -1534,54 +1684,54 @@
         function getCacheBuffer()
         {
             if (!options.cacheBuffer || cacheVars.currentCacheImg != cacheVars.cacheBufferLastIndex)
-                cacheImages(cacheVars.currentCacheImg + (cacheVars.cacheDirectionForward ? 1 : -1));
+            cacheImages(cacheVars.currentCacheImg + (cacheVars.cacheDirectionForward ? 1: -1));
         }
         function calculateCacheBuffer()
         {
             if (options.cacheBuffer)
             {
-                cacheVars.cacheBufferLastIndex = cacheVars.cacheDirectionForward ? currentItemIndex + options.cacheBuffer : currentItemIndex - options.cacheBuffer;
+                cacheVars.cacheBufferLastIndex = cacheVars.cacheDirectionForward ? currentItemIndex + options.cacheBuffer: currentItemIndex - options.cacheBuffer;
                 if (cacheVars.cacheBufferLastIndex < 0)
-                    cacheVars.cacheBufferLastIndex += imagesCount;
+                cacheVars.cacheBufferLastIndex += imagesCount;
                 else if (cacheVars.cacheBufferLastIndex >= imagesCount)
-                    cacheVars.cacheBufferLastIndex -= imagesCount;
+                cacheVars.cacheBufferLastIndex -= imagesCount;
             }
         }
         function cacheImages(imageIndexToCache)
         {
             if (cacheVars.cacheComplete)
-                return;
+            return;
 
             if (imageIndexToCache == imagesCount)
-                imageIndexToCache = 0;
+            imageIndexToCache = 0;
             else if (imageIndexToCache < 0)
-                imageIndexToCache += imagesCount;
-                
+            imageIndexToCache += imagesCount;
+
             var image = images[imageIndexToCache].media;
             cacheVars.currentCacheImg = imageIndexToCache;
             if (image && !image.loaded)
             {
                 if (!image.contentType || image.contentType === "image")
-                    cacheImg.src = image.src;
+                cacheImg.src = image.src;
                 else
-                    loadMedia(image, function(){
-                        advanceCache();
-                    });
+                loadMedia(image,
+                function() {
+                    advanceCache();
+                });
             }
             else
-                getCacheBuffer();
+            getCacheBuffer();
         }
-	    // End cache stuff
-    	
+        // End cache stuff
         function showLoaderIcon()
         {
             loading = true;
             clearTimeout(loaderTimeout);
             ajaxLoader.stop();
-            loaderTimeout = setTimeout(function(){
-                    ajaxLoader.css("opacity", "0.6").fadeIn(options.buttonsFadeTime);
-                },
-                options.buttonsFadeTime
+            loaderTimeout = setTimeout(function() {
+                ajaxLoader.css("opacity", "0.6").fadeIn(options.buttonsFadeTime);
+            },
+            options.buttonsFadeTime
             );
         }
 
@@ -1595,11 +1745,11 @@
         function setImage(itemIndex)
         {
             if (!isPlaying)
-                showLoaderIcon();
+            showLoaderIcon();
 
             loadAndDisplayMedia($.yoxview.currentImage.media);
         }
-        
+
         function resizePopup(popupPosition, callback)
         {
             popup.stop().animate(popupPosition, options.popupResizeTime, callback);
@@ -1608,40 +1758,40 @@
         function startPlay()
         {
             if (imagesCount == 1)
-                return;
+            return;
 
             isPlaying = true;
-            if(playBtnText)
-                playBtnText.text(currentLanguage.Pause);
+            if (playBtnText)
+            playBtnText.text(currentLanguage.Pause);
             else if ($.yoxview.infoButtons.playBtn)
-                $.yoxview.infoButtons.playBtn.attr("title", currentLanguage.Pause);
-            
+            $.yoxview.infoButtons.playBtn.attr("title", currentLanguage.Pause);
+
             if ($.yoxview.infoButtons.playBtn)
-                $.yoxview.infoButtons.playBtn.find("img").css("background-position", sprites.getBackgroundPosition("icons", "pause"));
-                
+            $.yoxview.infoButtons.playBtn.find("img").css("background-position", sprites.getBackgroundPosition("icons", "pause"));
+
             if (currentItemIndex < imagesCount - 1)
             {
                 popupTimeout = setTimeout(
-                    function(){
-                        $.yoxview.next(true);
-                    },
-                    options.playDelay
+                function() {
+                    $.yoxview.next(true);
+                },
+                options.playDelay
                 );
             }
             else
             {
                 if (options.loopPlay)
-                    popupTimeout = setTimeout(
-                        function(){
-                            $.yoxview.select(0, null);
-                        },
-                        options.playDelay
-                    );
+                popupTimeout = setTimeout(
+                function() {
+                    $.yoxview.select(0, null);
+                },
+                options.playDelay
+                );
                 else
-                    stopPlay();
-                   
+                stopPlay();
+
                 if (options.onEnd)
-                    setTimeout(options.onEnd, options.playDelay);
+                setTimeout(options.onEnd, options.playDelay);
             }
         }
         function stopPlay()
@@ -1649,48 +1799,55 @@
             clearTimeout(popupTimeout);
             isPlaying = false;
             if (playBtnText)
-                playBtnText.text(currentLanguage.Play);
+            playBtnText.text(currentLanguage.Play);
             else if ($.yoxview.infoButtons.playBtn)
-                $.yoxview.infoButtons.playBtn.attr("title", currentLanguage.Play);
-                
+            $.yoxview.infoButtons.playBtn.attr("title", currentLanguage.Play);
+
             if ($.yoxview.infoButtons.playBtn)
-                $.yoxview.infoButtons.playBtn.find("img").css("background-position", sprites.getBackgroundPosition("icons", "play"));
+            $.yoxview.infoButtons.playBtn.find("img").css("background-position", sprites.getBackgroundPosition("icons", "play"));
         }
 
         function blink(_element)
         {
-            _element.animate({ opacity : 0.8 }, 1000, function()
+            _element.animate({
+                opacity: 0.8
+            },
+            1000,
+            function()
             {
-                $(this).animate({opacity: 0.2}, 1000, blink($(this)));
+                $(this).animate({
+                    opacity: 0.2
+                },
+                1000, blink($(this)));
             });
         }
-        
+
         var newPanel = panel2;
         var oldPanel = panel1;
-        
+
         function getWindowDimensions()
         {
             var widthVal = popupWindow.width();
             var heightVal = popupWindow.height();
             var returnValue = {
-                height : heightVal,
-                width : widthVal,
-			    usableArea: {
-				    height : heightVal - popupMargins.totalHeight,
-				    width : widthVal - popupMargins.totalWidth
-			    }
+                height: heightVal,
+                width: widthVal,
+                usableArea: {
+                    height: heightVal - popupMargins.totalHeight,
+                    width: widthVal - popupMargins.totalWidth
+                }
             };
             return returnValue;
         }
-        
+
         function getImagePosition(imageSize)
         {
             var imagePosition = (imageSize.width && imageSize.height)
-                ? Yox.fitImageSize(imageSize, windowDimensions.usableArea)
-                : { 
-                    width: imageSize.width ? Math.min(imageSize.width, windowDimensions.usableArea.width) : windowDimensions.usableArea.width,
-                    height: imageSize.height ? Math.min(imageSize.height, windowDimensions.usableArea.height) : windowDimensions.usableArea.height
-                };
+            ? Yox.fitImageSize(imageSize, windowDimensions.usableArea)
+            : {
+                width: imageSize.width ? Math.min(imageSize.width, windowDimensions.usableArea.width) : windowDimensions.usableArea.width,
+                height: imageSize.height ? Math.min(imageSize.height, windowDimensions.usableArea.height) : windowDimensions.usableArea.height
+            };
 
             imagePosition.top = popupMargins.top + Math.round((windowDimensions.usableArea.height - imagePosition.height) / 2);
             imagePosition.left = popupMargins.left + Math.round((windowDimensions.usableArea.width - imagePosition.width) / 2);
@@ -1706,33 +1863,41 @@
             }
 
             var newImagePosition = getImagePosition(currentMaxSize);
-            newPanel.css({ width: "100%", height: "100%"});
-            
+            newPanel.css({
+                width: "100%",
+                height: "100%"
+            });
+
             isResizing = true;
             if (!isImageMode)
-                ctlButtons.css({top: Math.round((newImagePosition.height - mediaButtonsSize.height) / 2)});
+            ctlButtons.css({
+                top: Math.round((newImagePosition.height - mediaButtonsSize.height) / 2)
+            });
 
             resizePopup(newImagePosition,
-                function(){
-                    var newImageSize = { width: popup.width(), height: popup.height() };
-                    if (currentMaxSize.padding)
-                    {
-                        newImageSize.width -= currentMaxSize.padding.horizontal;
-                        newImageSize.height -= currentMaxSize.padding.vertical;
-                    }
-
-                    newPanel.css(newImageSize);
-                    isResizing = false;
-
-                    if (infoPanel && updateInfoPanel !== false)
-                        setInfoPanelHeight();
-                    
-                    if (resumePlay)
-                    {
-                        startPlay();
-                        resumePlay = false;
-                    }
+            function() {
+                var newImageSize = {
+                    width: popup.width(),
+                    height: popup.height()
+                };
+                if (currentMaxSize.padding)
+                {
+                    newImageSize.width -= currentMaxSize.padding.horizontal;
+                    newImageSize.height -= currentMaxSize.padding.vertical;
                 }
+
+                newPanel.css(newImageSize);
+                isResizing = false;
+
+                if (infoPanel && updateInfoPanel !== false)
+                setInfoPanelHeight();
+
+                if (resumePlay)
+                {
+                    startPlay();
+                    resumePlay = false;
+                }
+            }
             );
         }
 
@@ -1742,36 +1907,44 @@
             var titleHeight = infoText.outerHeight();
 
             if (titleHeight < infoPanelMinHeight)
-                titleHeight = infoPanelMinHeight;
-            
-            if (infoPanel.height() !== titleHeight){
-                infoPanel.stop().animate({height : titleHeight}, 500, function(){ 
-                
-                    if (options.renderInfoExternally){
-                    
+            titleHeight = infoPanelMinHeight;
+
+            if (infoPanel.height() !== titleHeight) {
+                infoPanel.stop().animate({
+                    height: titleHeight
+                },
+                500,
+                function() {
+
+                    if (options.renderInfoExternally) {
+
                         var infoPanelPosition = infoPanel.position();
                         $.extend(popupMargins, defaultPopupMargins);
                         if (infoPanelPosition.top === 0)
-                            popupMargins.top += titleHeight;
+                        popupMargins.top += titleHeight;
                         else
-                            popupMargins.bottom += titleHeight;
+                        popupMargins.bottom += titleHeight;
 
                         popupMargins.totalHeight = popupMargins.top + popupMargins.bottom;
                         windowDimensions = getWindowDimensions();
-                        $.yoxview.resize(false);                   
+                        $.yoxview.resize(false);
                     }
-                        
+
                     if (callback)
-                        callback();
+                    callback();
                 });
             }
         }
         function hideInfoPanel(callback)
         {
             clearTimeout(hideInfoTimeout);
-            infoPanel.stop().animate({ height: 0 }, 500, function(){
+            infoPanel.stop().animate({
+                height: 0
+            },
+            500,
+            function() {
                 if (callback)
-                    callback();
+                callback();
             });
         }
         function hideMenuPanel(callback)
@@ -1779,9 +1952,13 @@
             if (menuPanel)
             {
                 clearTimeout(hideMenuTimeout);
-                menuPanel.stop().animate({ top: menuHidePosition }, 500, function(){
+                menuPanel.stop().animate({
+                    top: menuHidePosition
+                },
+                500,
+                function() {
                     if (callback)
-                        callback();
+                    callback();
                 });
             }
         }
@@ -1790,87 +1967,95 @@
             if (menuPanel)
             {
                 clearTimeout(hideMenuTimeout);
-                menuPanel.stop().animate({ top: 0 }, 500, function(){
+                menuPanel.stop().animate({
+                    top: 0
+                },
+                500,
+                function() {
                     if (callback)
-                        callback();
+                    callback();
                 });
             }
         }
-        
+
         function swipePanels()
         {
             oldPanel = newPanel;
-	        newPanel = isFirstPanel ? panel2 : panel1;
-	        isFirstPanel = !isFirstPanel;
+            newPanel = isFirstPanel ? panel2: panel1;
+            isFirstPanel = !isFirstPanel;
         }
-	    function changeMedia(media)
-	    {
-	        var mediaIsImage = media.contentType === "image" || !media.contentType;
-    	    
-	        if (mediaIsImage && disableInfo && infoPanelWrap)
-	            infoPanelWrap.css("display", "block");
-    	        
-	        clearTimeout(hideInfoTimeout);
-    	    
-	        swipePanels();
-	        var panelData = newPanel.data("yoxviewPanel");
-    	    
-	        currentMaxSize.width = media.width;
-	        currentMaxSize.height = media.height;
-	        currentMaxSize.padding = media.padding;
+        function changeMedia(media)
+        {
+            var mediaIsImage = media.contentType === "image" || !media.contentType;
 
-	        if (infoPanel)
+            if (mediaIsImage && disableInfo && infoPanelWrap)
+            infoPanelWrap.css("display", "block");
+
+            clearTimeout(hideInfoTimeout);
+
+            swipePanels();
+            var panelData = newPanel.data("yoxviewPanel");
+
+            currentMaxSize.width = media.width;
+            currentMaxSize.height = media.height;
+            currentMaxSize.padding = media.padding;
+
+            if (infoPanel)
             {
                 var infoTextValue = media.title || "";
                 if (options.showDescription && media.description)
-                    infoTextValue += infoTextValue != ""
-                        ? "<div id='yoxview_infoTextDescription'>" + media.description + "</div>"
-                        : media.description;
+                infoTextValue += infoTextValue != ""
+                ? "<div id='yoxview_infoTextDescription'>" + media.description + "</div>"
+                : media.description;
 
                 infoText.html(infoTextValue);
-                
+
                 if (imagesCount > 1)
-                    countDisplay.html(currentItemIndex + 1 + "/" + imagesCount);
-                
+                countDisplay.html(currentItemIndex + 1 + "/" + imagesCount);
+
                 if (infoPanelLink)
                 {
                     if ($.yoxview.currentImage.link)
-                        infoPanelLink.attr("href", $.yoxview.currentImage.link).css("display", "inline");
+                    infoPanelLink.attr("href", $.yoxview.currentImage.link).css("display", "inline");
                     else
-                        infoPanelLink.css("display", "none");
+                    infoPanelLink.css("display", "none");
                 }
             }
-            
+
             var newImagePosition = getImagePosition(media);
-	        if (mediaIsImage)
-	        {
-	            currentImageElement = isFirstPanel ? image1 : image2;
-		        currentImageElement.attr({
-			        src : media.src,
-			        title : media.title,
-			        alt: media.alt
-		        });
-    			
-			    panelData.image = currentImageElement;
-    			
-		        // change to image mode:
-		        if (!panelData.isImage && panelData.element)
-		        {
-		            panelData.element.css("display", "none");
+            if (mediaIsImage)
+            {
+                currentImageElement = isFirstPanel ? image1: image2;
+                currentImageElement.attr({
+                    src: media.src,
+                    title: media.title,
+                    alt: media.alt
+                });
+
+                panelData.image = currentImageElement;
+
+                // change to image mode:
+                if (!panelData.isImage && panelData.element)
+                {
+                    panelData.element.css("display", "none");
                     panelData.image.css("display", "block");
-		            panelData.isImage = true;
-		        }
-    		    
-		        if (!isImageMode)
-		        {
-		            if (options.renderButtons)
-		                ctlButtons.css({"height": "100%", "width": "50%", "top": "0"});
-    		            
-		            disableInfo = false;
-		            isImageMode = true;
-		        }
-		    }
-		    else
+                    panelData.isImage = true;
+                }
+
+                if (!isImageMode)
+                {
+                    if (options.renderButtons)
+                    ctlButtons.css({
+                        "height": "100%",
+                        "width": "50%",
+                        "top": "0"
+                    });
+
+                    disableInfo = false;
+                    isImageMode = true;
+                }
+            }
+            else
             {
                 if (panelData.element && panelData.elementId != media.elementId)
                 {
@@ -1882,9 +2067,9 @@
                     if (media.html)
                     {
                         panelData.element = $("<div>", {
-	                        className: mediaPanelClass
-	                    });
-	                    popup.append(panelData.element);
+                            className: mediaPanelClass
+                        });
+                        popup.append(panelData.element);
                     }
                     else
                     {
@@ -1894,32 +2079,34 @@
                 }
 
                 if (media.html)
-                    panelData.element.html(media.html);
+                panelData.element.html(media.html);
 
                 newPanel = panelData.element;
-                
+
                 if (isImageMode)
                 {
                     if (infoPanelWrap)
-		            {
-		                if (options.autoHideInfo !== false)
-		                    hideInfoPanel();
-            			    
-		                infoPanelWrap.css("display", "none");
-		                disableInfo = true;
-		            }
-    		        
-		            if (options.renderButtons)
-		                ctlButtons.css({
-			                "width": mediaButtonsSize.width,
-			                "height": mediaButtonsSize.height
-			            });
-    			    
+                    {
+                        if (options.autoHideInfo !== false)
+                        hideInfoPanel();
+
+                        infoPanelWrap.css("display", "none");
+                        disableInfo = true;
+                    }
+
+                    if (options.renderButtons)
+                    ctlButtons.css({
+                        "width": mediaButtonsSize.width,
+                        "height": mediaButtonsSize.height
+                    });
+
                     isImageMode = false;
                 }
-                
+
                 if (options.renderButtons)
-                    ctlButtons.css({top: (newImagePosition.height - mediaButtonsSize.height) / 2 });
+                ctlButtons.css({
+                    top: (newImagePosition.height - mediaButtonsSize.height) / 2
+                });
 
                 // change to element mode:
                 if (panelData.isImage === undefined || panelData.isImage)
@@ -1929,121 +2116,152 @@
                     panelData.isImage = false;
                 }
             }
-            
-            var newImageDimensions = { width: newImagePosition.width, height: newImagePosition.height };
-            newPanel.css(firstImage ? { width: "100%", height: "100%" } : newImageDimensions);
-            
+
+            var newImageDimensions = {
+                width: newImagePosition.width,
+                height: newImagePosition.height
+            };
+            newPanel.css(firstImage ? {
+                width: "100%",
+                height: "100%"
+            }: newImageDimensions);
+
             if (loading)
-                hideLoaderIcon();
+            hideLoaderIcon();
 
             isResizing = true;
             resizePopup(newImagePosition,
-                function()
+            function()
+            {
+                if (firstImage)
                 {
-                    if (firstImage)
+                    $.yoxview.isOpen = true;
+                    newPanel.css(newImageDimensions);
+                    if (options.controlsInitialDisplayTime > 0)
                     {
-                        $.yoxview.isOpen = true;
-                        newPanel.css(newImageDimensions);
-                        if (options.controlsInitialDisplayTime > 0)
-                        {
-                            if (options.showButtonsOnOpen)
-                                ctlButtons.animate({opacity: 0.5}, options.controlsInitialFadeTime, function(){ 
-                                    if(options.buttonsFadeTime != 0)
-                                        $(this).delay(options.controlsInitialDisplayTime).animate({opacity : 0}, options.controlsInitialFadeTime);
-                                });
-                            
-                            if (options.showBarsOnOpen)
-                            {
-                                showMenuPanel(function(){
-                                    if (options.autoHideMenu !== false)
-                                        hideMenuTimeout = setTimeout(function(){ 
-                                                hideMenuPanel();
-                                            }, 
-                                            options.controlsInitialDisplayTime
-                                        );
-                                });
-                                if (infoPanel)
-                                    setInfoPanelHeight(function(){
-                                        if (options.autoHideInfo !== false)
-                                            hideInfoTimeout = setTimeout(function(){ hideInfoPanel(); }, options.controlsInitialDisplayTime);
-                                    });
-                            }
-                        }
+                        if (options.showButtonsOnOpen)
+                        ctlButtons.animate({
+                            opacity: 0.5
+                        },
+                        options.controlsInitialFadeTime,
+                        function() {
+                            if (options.buttonsFadeTime != 0)
+                            $(this).delay(options.controlsInitialDisplayTime).animate({
+                                opacity: 0
+                            },
+                            options.controlsInitialFadeTime);
+                        });
 
-                        if (options.autoPlay)
-                            $.yoxview.play();
-
-                        if (options.onOpen)
-                            options.onOpen();
-                            
-                        if (onOpenCallback)
+                        if (options.showBarsOnOpen)
                         {
-                            onOpenCallback();
-                            onOpenCallback = undefined;
+                            showMenuPanel(function() {
+                                if (options.autoHideMenu !== false)
+                                hideMenuTimeout = setTimeout(function() {
+                                    hideMenuPanel();
+                                },
+                                options.controlsInitialDisplayTime
+                                );
+                            });
+                            if (infoPanel)
+                            setInfoPanelHeight(function() {
+                                if (options.autoHideInfo !== false)
+                                hideInfoTimeout = setTimeout(function() {
+                                    hideInfoPanel();
+                                },
+                                options.controlsInitialDisplayTime);
+                            });
                         }
-                
-                        firstImage = false;
                     }
-                    
+
+                    if (options.autoPlay)
+                    $.yoxview.play();
+
+                    if (options.onOpen)
+                    options.onOpen();
+
+                    if (onOpenCallback)
+                    {
+                        onOpenCallback();
+                        onOpenCallback = undefined;
+                    }
+
+                    firstImage = false;
+                }
+
+                if (currentMaxSize.padding)
+                {
+                    var newImageWidth = popup.width();
+                    var newImageHeight = popup.height();
+
                     if (currentMaxSize.padding)
                     {
-                        var newImageWidth = popup.width();
-                        var newImageHeight = popup.height();
-
-                        if (currentMaxSize.padding)
-                        {
-                            newImageWidth -= currentMaxSize.padding.horizontal;
-                            newImageHeight -= currentMaxSize.padding.vertical;
-                        }
-                        newPanel.css({ "width" : newImageWidth + "px", "height" : newImageHeight + "px" });                    
+                        newImageWidth -= currentMaxSize.padding.horizontal;
+                        newImageHeight -= currentMaxSize.padding.vertical;
                     }
-                    isResizing = false;
+                    newPanel.css({
+                        "width": newImageWidth + "px",
+                        "height": newImageHeight + "px"
+                    });
                 }
+                isResizing = false;
+            }
             );
 
-            newPanel.css({'z-index': '2', opacity: 1});
+            newPanel.css({
+                'z-index': '2',
+                opacity: 1
+            });
             if (oldPanel)
-                oldPanel.css('z-index', '1');
-            
-            if (!firstImage){
-                newPanel.fadeIn(options.popupResizeTime, function(){
+            oldPanel.css('z-index', '1');
+
+            if (!firstImage) {
+                newPanel.fadeIn(options.popupResizeTime,
+                function() {
                     if (oldPanel)
-                        oldPanel.css('display', 'none');
-                        
+                    oldPanel.css('display', 'none');
+
                     if (infoPanel)
-                        setInfoPanelHeight(function(){
-                            if (options.autoHideInfo !== false)
-                                hideInfoTimeout = setTimeout(function(){ hideInfoPanel(); }, options.titleDisplayDuration);
-                        });
+                    setInfoPanelHeight(function() {
+                        if (options.autoHideInfo !== false)
+                        hideInfoTimeout = setTimeout(function() {
+                            hideInfoPanel();
+                        },
+                        options.titleDisplayDuration);
+                    });
 
                     if (imagesCount > 1)
                     {
                         if (options.cacheImagesInBackground && !cacheVars.cacheComplete)
-                                cacheImages(currentItemIndex + (cacheVars.cacheDirectionForward ? 1 : -1));
+                        cacheImages(currentItemIndex + (cacheVars.cacheDirectionForward ? 1: -1));
 
                         if (isPlaying)
-                            startPlay();
+                        startPlay();
                     }
                 });
             }
-            else{
-                newPanel.css({ display: "block", width: "100%", height: "100%" });
+            else {
+                newPanel.css({
+                    display: "block",
+                    width: "100%",
+                    height: "100%"
+                });
             }
-            
-	    }
+
+        }
         $(tempImg).load(function()
         {
-		    if (this.width == 0)
-		    {
-		        displayError("Image error");
+            if (this.width == 0)
+            {
+                displayError("Image error");
                 return;
             }
-            changeMedia($.extend({}, $.yoxview.currentImage.media, {
+            changeMedia($.extend({},
+            $.yoxview.currentImage.media, {
                 width: this.width,
                 height: this.height
             }));
         })
-        .error(function(){
+        .error(function() {
             displayError("Image not found:<br /><span class='errorUrl'>" + this.src + "</span>");
         });
 
@@ -2052,9 +2270,10 @@
             jQuery.jsonp({
                 url: (mediaProviderUrls[provider] || "http://oohembed.com/oohembed/"),
                 data: jQuery.extend({
-                    "url" : url,
+                    "url": url,
                     "format": "json"
-                }, availableSize),
+                },
+                availableSize),
                 dataType: 'jsonp',
                 callbackParameter: "callback",
                 success: function(data)
@@ -2065,14 +2284,14 @@
                         height: data.height,
                         type: data.type
                     };
-                    
+
                     if (data.type === "video")
                     {
                         media.html = data.html
-                            .replace(/<embed /, "<embed wmode=\"transparent\" ")
-                            .replace(/<param/, "<param name=\"wmode\" value=\"transparent\"><param")
-                            .replace(/width=\"[\d]+\"/ig, "width=\"100%\"")
-                            .replace(/height=\"[\d]+\"/ig, "height=\"100%\"");
+                        .replace(/<embed /, "<embed wmode=\"transparent\" ")
+                        .replace(/<param/, "<param name=\"wmode\" value=\"transparent\"><param")
+                        .replace(/width=\"[\d]+\"/ig, "width=\"100%\"")
+                        .replace(/height=\"[\d]+\"/ig, "height=\"100%\"");
                     }
                     else if (data.type === "photo")
                     {
@@ -2084,9 +2303,9 @@
                     }
                     onLoad(media);
                 },
-                error: function(errorSender, errorMsg){
+                error: function(errorSender, errorMsg) {
                     if (onError)
-                        onError(errorSender, errorMsg);
+                    onError(errorSender, errorMsg);
                 }
             });
         };
@@ -2096,15 +2315,15 @@
             try
             {
                 if (!media)
-                    throw("Error: Media is unavailable.");
+                throw ("Error: Media is unavailable.");
 
                 if (media.contentType === "image" || !media.contentType)
                 {
                     // Resets the src attribute for the image - avoids a rendering problem in Chrome.
-                    // $.opacity is tested so this isn't applied in IE (up to IE8), 
+                    // $.opacity is tested so this isn't applied in IE (up to IE8),
                     // since it creates a problem with the image's fading:
                     if ($.support.opacity)
-                        tempImg.src = "";
+                    tempImg.src = "";
 
                     tempImg.src = media.src;
                 }
@@ -2113,39 +2332,41 @@
                     if (!media.loaded && media.contentType == "ooembed")
                     {
                         loadMedia(
-                            media, 
-                            function(loadedMedia){
-                                changeMedia(loadedMedia);
-                            },
-                            function(errorSender)
-                            {
-                                displayError("Error getting data from:<br /><span class='errorUrl'>" + errorSender.data.url + "</span>");
-                            }
+                        media,
+                        function(loadedMedia) {
+                            changeMedia(loadedMedia);
+                        },
+                        function(errorSender)
+                        {
+                            displayError("Error getting data from:<br /><span class='errorUrl'>" + errorSender.data.url + "</span>");
+                        }
                         );
-		            }
-		            else
-		                changeMedia($.yoxview.currentImage.media);
-		        }
-		    }
-		    catch(error)
-		    {
-		        displayError(error);
-		    }
+                    }
+                    else
+                    changeMedia($.yoxview.currentImage.media);
+                }
+            }
+            catch(error)
+            {
+                displayError(error);
+            }
         }
         function loadMedia(media, onLoad, onError)
         {
             if (media.contentType == "ooembed")
             {
-	            loadMediaFromProvider(
-	                media.provider,
-	                media.url,
-	                options.defaultDimensions.video,
-	                function(mediaData){
-	                    $.extend(media, mediaData, {loaded: true});
-	                    if (onLoad)
-	                        onLoad(media);
-	                },
-	                onError
+                loadMediaFromProvider(
+                media.provider,
+                media.url,
+                options.defaultDimensions.video,
+                function(mediaData) {
+                    $.extend(media, mediaData, {
+                        loaded: true
+                    });
+                    if (onLoad)
+                    onLoad(media);
+                },
+                onError
                 );
             }
         }
@@ -2159,41 +2380,45 @@
                 title: ""
             });
         }
-        this.update = function(){
+        this.update = function() {
             var options;
             if (this instanceof jQuery)
             {
                 options = optionsSets[this.data("yoxview").optionsSet || 0];
-                this.yoxview("unload", function(caller){ caller.yoxview(options) });
+                this.yoxview("unload",
+                function(caller) {
+                    caller.yoxview(options)
+                });
                 return this;
             }
             else
             {
                 options = optionsSets[0];
                 this.unload();
-                $.each(loadedViews, function(i, view){
+                $.each(loadedViews,
+                function(i, view) {
                     view.yoxview(options);
                 });
             }
         }
-        this.unload = function(callback){
+        this.unload = function(callback) {
             var caller = this;
-            
+
             if (!options)
-                return(this);
-                
-            function doUnload(){
-                var allowedThumbnailsSelector = getAllowedThumbnailsSelector(options);           
-                function removeFromView(view){   
+            return (this);
+
+            function doUnload() {
+                var allowedThumbnailsSelector = getAllowedThumbnailsSelector(options);
+                function removeFromView(view) {
                     view.undelegate(allowedThumbnailsSelector, "click.yoxview")
                     .removeData("yoxview")
                     .yoxthumbs("unload", "yoxview")
                     .find(allowedThumbnailsSelector).removeData("yoxview");
                 }
-                function removeFromDocument(){
+                function removeFromDocument() {
                     popupWindow.unbind(".yoxview");
-                    
-                    if (popup){
+
+                    if (popup) {
                         popupWrap.remove();
                         popup = undefined;
                     }
@@ -2201,27 +2426,28 @@
                 if (caller instanceof jQuery)
                 {
                     if (caller.data("yoxview"))
-                        removeFromView(caller);
+                    removeFromView(caller);
                 }
                 else
                 {
-                    jQuery.each(loadedViews, function(i, view){
+                    jQuery.each(loadedViews,
+                    function(i, view) {
                         removeFromView(view);
                     });
-                    
-                    removeFromDocument();                
+
+                    removeFromDocument();
                 }
 
                 if (callback)
-                    callback(caller);
+                callback(caller);
                 else
-                    return caller;
+                return caller;
             }
-            
+
             if (options.onBeforeUnload)
-                options.onBeforeUnload(doUnload)
+            options.onBeforeUnload(doUnload)
             else
-                doUnload();
+            doUnload();
         };
     }
 })(jQuery);
