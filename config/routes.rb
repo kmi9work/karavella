@@ -1,8 +1,8 @@
 Nadya::Application.routes.draw do
 
   
+  match 'make/:id/main/:gallery_id' => 'photos#make_photo_main', :as => :make_photo_main
   
-
   devise_for :admins
   
   match 'area/:id' => 'areas#index', :constraints => { :id => /\d+/ }, :as => :area

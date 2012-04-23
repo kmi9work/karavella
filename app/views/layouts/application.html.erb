@@ -1,4 +1,3 @@
-<%#coding: utf-8 %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -11,7 +10,8 @@
     <meta name="keywords" content="<%= t :keywords %>"/>
     <meta name="author" content="<%= t :author %>"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <%#= render :partial => '/layouts/yoxview'  %>
+    <%= render :partial => '/layouts/yoxview'  %>
+    <%= render :partial => '/layouts/ganalytics' %>
   </head>
   <body>
     <div class="container">
@@ -44,8 +44,8 @@
           <%= image_tag('slogan.png') %>
         </div>
       </div>
-      <div id="yoxview">
-      </div>
+      <!-- <div id="yoxview">
+            </div> -->
     </div>
   </body>
 </html>
