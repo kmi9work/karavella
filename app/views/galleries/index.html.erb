@@ -5,7 +5,11 @@
     <% @galleries.each_with_index do |gallery, i| %>
       <li class="span3">
         <div class="thumbnail">
-          <%= link_to image_tag(gallery.main_photo.image.thumb.url), gallery_photos_path(gallery), :class => 'thumbnail' %>
+          <% if gallery.main_photo %>
+            <%= link_to image_tag(gallery.main_photo.image.thumb.url), gallery_photos_path(gallery), :class => 'thumbnail' %>
+          <% else %>
+            <%= link_to image_tag('logo.png'), gallery_photos_path(gallery), :class => 'thumbnail' %>
+          <% end %>
           <h5><%= gallery.name %></h5>
           <%= link_to 'Edit', edit_gallery_path(gallery) if admin_signed_in?%>
           <%= link_to 'Destroy', gallery, confirm: 'Are you sure?', method: :delete if admin_signed_in?%>
