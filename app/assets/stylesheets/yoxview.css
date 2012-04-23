@@ -64,7 +64,7 @@
 	z-index: 4;
 	opacity: 0.6;
 	filter: alpha(opacity=60);
-	background-image: url(images/sprites.png);
+	background-image: url(assets/yoxview/sprites.png);
 	background-repeat: no-repeat;
 	display: none;
 }
@@ -89,7 +89,7 @@
 	padding-right: 9px;
 	position: absolute; 
 	right: 0;
-	background: url(images/sprites.png) no-repeat left -77px;
+	background: url(assets/yoxview/sprites.png) no-repeat left -77px;
 	background: rgba(0, 0, 0, 0.8);
 	-moz-border-radius: 0 0 0 15px;
 	-webkit-border-radius: 0 0 0 15px;
