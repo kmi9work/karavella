@@ -5,7 +5,7 @@
     - @photos.each do |photo|
       %li.span2_5
         .thumbnail.yoxview
-          = link_to image_tag(photo.image.thumb.url), photo.image_url, :class => 'thumbnail'
+          = link_to image_tag(photo.image.thumb.url), photo.image_url, :class => 'thumbnail', :rel => 'gallery'
           - if admin_signed_in?
             = link_to 'Сделать главной', make_photo_main_path(photo.id, photo.gallery_id) 
             = link_to 'Destroy', gallery_photo_path(@gallery, photo), confirm: 'Are you sure?', method: :delete

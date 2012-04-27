@@ -5,7 +5,7 @@ Nadya::Application.routes.draw do
   
   devise_for :admins
   
-  match 'area/:id' => 'areas#index', :constraints => { :id => /\d+/ }, :as => :area
+  match 'area/:id' => 'areas#index', :constraints => { :id => /\d+/ }, :as => :area_index
   resources :areas
   
   resources :galleries do 

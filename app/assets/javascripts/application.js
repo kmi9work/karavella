@@ -14,4 +14,6 @@
 //= require jquery_ujs
 //= require swfobject
 //= require jquery.uploadify
-//= require yoxview-init
+
+/* require jquery.fancybox-1.3.4.pack
+*/
